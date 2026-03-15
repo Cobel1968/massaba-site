@@ -1,0 +1,114 @@
+// src/app/layout.tsx
+import type { Metadata } from 'next';
+import { GeistSans, GeistMono } from 'next/font/google';
+import './globals.css';
+import Navbar from '@/components/Navbar';
+
+const geistSans = GeistSans({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const geistMono = GeistMono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Massaba Global Consultancy',
+    template: '%s | Massaba Global Consultancy',
+  },
+  description:
+    'Cabinet de conseil multi-services : éducation internationale, commerce de véhicules, visas, liaison gouvernementale et voyages Omra.',
+  keywords: [
+    'consultance globale',
+    'études à l\'étranger',
+    'import export véhicules',
+    'visas golfe',
+    'Omra',
+    'liaison administrative',
+    'Abidjan',
+    'Côte d\'Ivoire',
+  ],
+  openGraph: {
+    title: 'Massaba Global Consultancy',
+    description:
+      'Connecter les personnes, la mobilité et les opportunités à travers le monde.',
+    url: 'https://massaba-consultancy.com',
+    siteName: 'Massaba Global',
+    images: [
+      {
+        url: '/og-image.jpg', // ← add your real OG image in public/
+        width: 1200,
+        height: 630,
+        alt: 'Massaba Global Consultancy',
+      },
+    ],
+    locale: 'fr_CI',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Massaba Global Consultancy',
+    description:
+      'Services de conseil en éducation, véhicules, visas et Omra.',
+    images: ['/og-image.jpg'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`
+          bg-slate-950 text-slate-50 
+          antialiased 
+          min-h-screen 
+          font-sans 
+          scroll-smooth
+        `}
+      >
+        <div className="flex min-h-screen flex-col">
+          {/* Navbar */}
+          <Navbar />
+
+          {/* Main content */}
+          <main className="flex-1">
+            {children}
+          </main>
+
+          {/* Footer */}
+          <footer className="border-t border-slate-800 bg-slate-950">
+            <div className="mx-auto max-w-6xl px-6 py-12 text-center text-sm text-slate-400 md:flex md:items-center md:justify-between">
+              <p>
+                © {new Date().getFullYear()} Massaba Global Consultancy. Tous droits réservés.
+              </p>
+              <div className="mt-4 flex justify-center gap-6 md:mt-0">
+                <Link href="/mentions-legales" className="hover:text-amber-400 transition">
+                  Mentions légales
+                </Link>
+                <Link href="/confidentialite" className="hover:text-amber-400 transition">
+                  Confidentialité
+                </Link>
+                <Link href="/contact" className="hover:text-amber-400 transition">
+                  Contact
+                </Link>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </body>
+    </html>
+  );
+}
