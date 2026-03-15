@@ -1,83 +1,39 @@
-﻿@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-primary: var(--primary);
-  --color-primary-dark: var(--primary-dark);
-  --color-secondary: var(--secondary);
-}
-
-/* Root Variables (Dark Mode Default) */
 :root {
-  --background: #020617;           /* slate-950 */
-  --foreground: #f1f5f9;           /* slate-100 */
-  --muted: #475569;                /* slate-600 */
-  --muted-foreground: #94a3b8;     /* slate-400 */
-  --border: #1e293b;               /* slate-800 */
-  --input: #1e293b;
-  --ring: #fbbf24;                 /* amber-400 */
-
-  --primary: #fbbf24;
-  --primary-dark: #f59e0b;
-  --secondary: #ea580c;
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  /* ... rest of your variables ... */
 }
 
-/* Global base styles */
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+}
+
 @layer base {
-  * {
-    border-color: var(--border);
-  }
-  html {
-    scroll-behavior: smooth;
-  }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-sans);
-    margin: 0;
-    min-height: 100vh;
+    /* This makes the font slightly bolder and clearer */
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    letter-spacing: -0.01em;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-foreground;
+  
+  /* Ensuring all paragraphs are highly readable */
+  p {
+    @apply text-zinc-300 leading-relaxed;
+    font-size: 1.1rem; /* Slightly larger than standard */
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold tracking-tight text-white;
   }
 }
 
-/* Custom utilities */
-@layer utilities {
-  .section-spacing { @apply mt-16 lg:mt-24; }
-  .section-large   { @apply mt-24 lg:mt-32; }
+/* Custom class for ultra-visible labels */
+.label-sharp {
+  @apply text-[11px] font-bold uppercase tracking-[0.2em] text-primary/80 mb-2 block;
 }
-
-/* Hero background glow */
-.hero-bg::before {
-  content: "";
-  position: absolute;
-  inset: -200px;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(251,191,36,0.18), transparent 45%),
-    radial-gradient(circle at 70% 60%, rgba(249,115,22,0.18), transparent 45%);
-  animation: heroGlow 22s linear infinite;
-  z-index: 0;
-  filter: blur(60px);
-}
-
-@keyframes heroGlow {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.15); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
