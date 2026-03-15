@@ -92,7 +92,7 @@ export default function DashboardPage() {
               <div className="flex-1 p-6 overflow-y-auto space-y-4 font-sans">
                 <div className="bg-muted/50 p-4 rounded-2xl border border-border max-w-[85%]">
                   <p className="text-xs leading-relaxed">Welcome to your secure communication line. Your assigned consultant will respond to any technical or logistical inquiries here.</p>
-                  <span className="text-[9px] uppercase font-mono mt-2 block opacity-50">Massaba HQ • 10:42 AM</span>
+                  <span className="text-[9px] uppercase font-mono mt-2 block opacity-50">Massaba HQ â€¢ 10:42 AM</span>
                 </div>
               </div>
 

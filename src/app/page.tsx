@@ -1,4 +1,4 @@
-import LiveStats from '@/components/PartnerAds'.Replace('PartnerAds', 'LiveStats')
+import LiveStats from '@/components/LiveStats'
 import ProjectGallery from '@/components/ProjectGallery'
 import PartnerAds from '@/components/PartnerAds'
 import Link from 'next/link'
