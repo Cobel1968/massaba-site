@@ -3,15 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #0a0a0a;
+  --foreground: #f4f4f5;
 }
 
 body {
-  background: black;
-  color: white;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #0a0a0a;
+  color: #f4f4f5;
+  font-family: 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Sophisticated Typography */
+h1 {
+  font-weight: 300; /* Light but tall for an elegant feel */
+  letter-spacing: -0.04em;
+}
+
+p {
+  color: #a1a1aa;
+  font-weight: 400;
 }
