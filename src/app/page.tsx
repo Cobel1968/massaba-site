@@ -31,7 +31,7 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link 
-              href="/portal" 
+              href="/portal/register" 
               className="group relative px-10 py-5 bg-primary text-primary-foreground font-black uppercase tracking-widest rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-primary/40"
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -63,6 +63,7 @@ export default function LandingPage() {
 </main>
   )
 }
+
 
 
 
