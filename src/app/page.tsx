@@ -10,7 +10,7 @@ export default function Home() {
       {/* Review Banner - Subtle indicator for Mr. Coulibaly */}
       <div className="bg-primary/10 border-b border-primary/20 py-2 text-center">
         <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary">
-           Production Preview v1.0 • Read-Only Mode
+           Production Preview v1.0 â€¢ Read-Only Mode
         </p>
       </div>
 
