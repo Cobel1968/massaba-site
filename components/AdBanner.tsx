@@ -1,39 +1,33 @@
-﻿'use client';
-
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+﻿'use client'
+import React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 
 interface AdBannerProps {
-  imageSrc: string;
-  alt: string;
-  linkUrl: string;
-  className?: string;
+  imageSrc: string
+  alt: string
+  linkUrl: string
 }
 
-export default function AdBanner({
-  imageSrc,
-  alt,
-  linkUrl,
-  className = '',
-}: AdBannerProps) {
+export default function AdBanner({ imageSrc, alt, linkUrl }: AdBannerProps) {
   return (
-    <Link href={linkUrl} target="_blank" rel="noopener noreferrer" className={`block ${className}`}>
-      <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-amber-500/30 transition-shadow duration-300 group">
-        <Image
-          src={imageSrc}
-          alt={alt}
-          width={1200}
-          height={300}
-          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-          <p className="text-white font-semibold text-lg">
-            Découvrir → {alt.includes('Cobel') ? 'CobelBTC' : 'Rita Services'}
+    <Link href={linkUrl} target="_blank" rel="noopener noreferrer" className="block my-8 max-w-4xl mx-auto">
+      <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-amber-500/30 transition-all group">
+        <div className="relative w-full h-48 md:h-64">
+          <Image
+            src={imageSrc}
+            alt={alt}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4 md:p-6">
+          <p className="text-white text-sm md:text-base font-semibold">
+            {alt.includes('Cobel') ? 'Discover Cobel Business Training Center' : 'Discover Our Services'}
           </p>
         </div>
       </div>
     </Link>
-  );
+  )
 }
