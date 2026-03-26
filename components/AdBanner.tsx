@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -14,10 +14,10 @@ export default function AdBanner({ imageSrc, alt, linkUrl }: AdBannerProps) {
     <Link href={linkUrl} target="_blank" rel="noopener noreferrer" className="block my-8 max-w-4xl mx-auto">
       <div className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-amber-500/30 transition-all group">
         <div className="relative w-full h-48 md:h-64">
-          <Image
+          <img
             src={imageSrc}
             alt={alt}
-            fill
+            
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           />
