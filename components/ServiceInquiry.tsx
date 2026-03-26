@@ -54,8 +54,8 @@ export default function ServiceInquiry({ serviceName }) {
       <div className="mt-6 pt-6 border-t border-slate-700">
         <p className="text-slate-400 text-sm text-center mb-3">Or contact us directly:</p>
         <div className="flex gap-3">
-          <a href="tel:+971525019802" className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"><Phone size={14} /> Call</a>
-          <a href="mailto:massaba555@yahoo.fr" className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"><Mail size={14} /> Email</a>
+          <a href="tel:{COMPANY_INFO.phone}" className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"><Phone size={14} /> Call</a>
+          <a href="mailto:{COMPANY_INFO.email}" className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"><Mail size={14} /> Email</a>
         </div>
       </div>
     </div>

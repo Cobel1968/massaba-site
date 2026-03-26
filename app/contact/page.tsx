@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send, MessageSquare, Sparkles, Building, Globe, ArrowRight } from 'lucide-react'
 
@@ -125,7 +125,7 @@ export default function ContactPage() {
                   <Phone className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-slate-400 text-sm font-medium mb-1">Phone & WhatsApp</p>
-                    <a href="tel:+971525019802" className="text-white hover:text-amber-500 transition block mb-1">
+                    <a href="tel:{process.env.NEXT_PUBLIC_COMPANY_PHONE}" className="text-white hover:text-amber-500 transition block mb-1">
                       +971 525 019 802
                     </a>
                     <a href="https://wa.me/971525019802" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 transition text-sm inline-flex items-center gap-1">
@@ -138,8 +138,8 @@ export default function ContactPage() {
                   <Mail className="w-5 h-5 text-amber-500 mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-slate-400 text-sm font-medium mb-1">Email</p>
-                    <a href="mailto:massaba555@yahoo.fr" className="text-white hover:text-amber-500 transition break-all">
-                      massaba555@yahoo.fr
+                    <a href="mailto:{process.env.NEXT_PUBLIC_COMPANY_EMAIL}" className="text-white hover:text-amber-500 transition break-all">
+                      {process.env.NEXT_PUBLIC_COMPANY_EMAIL}
                     </a>
                   </div>
                 </div>

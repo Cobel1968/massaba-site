@@ -1,0 +1,21 @@
+﻿# Add these environment variables in Vercel Dashboard:
+
+## Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://wdvidnhqzomdsiirizla.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_GJyXo6iTmYJAR48JMF9q4g_JyVztLPO
+
+## Company Contact
+NEXT_PUBLIC_COMPANY_EMAIL=massaba555@yahoo.fr
+NEXT_PUBLIC_COMPANY_PHONE=+971525019802
+NEXT_PUBLIC_COMPANY_WHATSAPP=+971525019802
+NEXT_PUBLIC_COMPANY_ADDRESS=Compass Building, Al Shohada Road, Al Hamra Industrial Zone, FZ, RAK, UAE
+NEXT_PUBLIC_BUSINESS_HOURS=Sunday-Thursday 9:00 AM - 6:00 PM
+
+## Tax Information
+NEXT_PUBLIC_VAT_RATE=5
+NEXT_PUBLIC_TRN_NUMBER=100123456789003
+
+## Optional Social Media
+# NEXT_PUBLIC_LINKEDIN_URL=https://linkedin.com/company/massaba
+# NEXT_PUBLIC_FACEBOOK_URL=https://facebook.com/massaba
+# NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/massaba

@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from 'next'
 import './globals.css'
+import { COMPANY_INFO } from '@/lib/constants'
 import Navbar from '../components/navbar'
 import Link from 'next/link'
 
