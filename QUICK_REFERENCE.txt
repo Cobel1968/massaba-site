@@ -1,0 +1,45 @@
+﻿
+           MASBABA CONSULTING - QUICK REFERENCE                
+
+
+ SYSTEM ACCESS
+
+Admin Login:    [VERCEL_URL]/admin
+Client Login:   [VERCEL_URL]/login
+Client Signup:  [VERCEL_URL]/signup
+Client Portal:  [VERCEL_URL]/portal
+
+ SUPER ADMIN
+
+Email:    admin@massaba.com
+Password: [SET IN SUPABASE]
+
+ KEY FUNCTIONS
+
+Record Payment:     Admin  Transactions  Record Payment
+Create Invoice:     Admin  Invoices  Create Invoice
+View Clients:       Admin  Clients
+Pending Inquiries:  Admin  Inquiries
+Generate Reports:   Admin  Reports
+
+ VAT INFORMATION
+
+UAE VAT Rate:       5%
+TRN Number:         100123456789003
+Company Name:       Massaba Consulting
+
+ AUTO-NUMBERING
+
+Client Numbers:     MASS-YYYY-XXXXXX
+Transaction IDs:    TXN-YYYYMMDD-XXXXXXXX
+Invoice Numbers:    INV-YYYY-XXXXX
+
+ SUPPORT
+
+Developer: [YOUR NAME]
+Email: [YOUR EMAIL]
+Phone: [YOUR PHONE]
+
+
+  Keep this card secure. Do not share credentials publicly.    
+
