@@ -1,12 +1,9 @@
 ﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['wdvidnhqzomdsiirizla.supabase.co'],
-    unoptimized: process.env.NODE_ENV === 'development' ? false : true,
+    unoptimized: true,
   },
-  experimental: {
-    turbo: false,
-  },
+  output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -1,5 +1,4 @@
 ﻿import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import ServiceInquiry from '@/components/ServiceInquiry'
 
@@ -21,7 +20,6 @@ export default function B2BConsultancyPage() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column - Service Info */}
           <div>
             <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
               <img 
@@ -29,8 +27,7 @@ export default function B2BConsultancyPage() {
                 alt="B2B Consultancy"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.target.src = '/placeholder-image.jpg';
-                  e.target.parentElement.classList.add('bg-slate-700');
+                  e.target.src = '/images/placeholders/placeholder.svg'
                 }}
               />
             </div>
@@ -50,7 +47,6 @@ export default function B2BConsultancyPage() {
             </div>
           </div>
 
-          {/* Right Column - Inquiry Form */}
           <ServiceInquiry serviceName="B2B Consultancy" />
         </div>
       </div>

@@ -1,9 +1,8 @@
 ﻿import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import ServiceInquiry from '@/components/ServiceInquiry'
 
-export default function Page() {
+export default function VehicleImportExportPage() {
   const serviceFeatures = [
     'Global vehicle sourcing',
     'Shipping logistics',
@@ -21,14 +20,15 @@ export default function Page() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column - Service Info */}
           <div>
-            <div className="relative h-80 rounded-xl overflow-hidden mb-6">
-              <Image 
+            <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
+              <img 
                 src="/images/vehicle-import-export/MercedesF4matic.jpeg"
                 alt="Vehicle Import/Export"
-                fill
-                className="object-cover"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.src = '/images/placeholders/placeholder.svg'
+                }}
               />
             </div>
             
@@ -41,18 +41,12 @@ export default function Page() {
               <h2 className="text-2xl font-bold text-white mb-4">What We Offer:</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {serviceFeatures.map((feature, index) => (
-                  <li key={index} className="text-slate-300"> {feature}</li>
+                  <li key={index} className="text-slate-300">✓ {feature}</li>
                 ))}
               </ul>
             </div>
-            
-            <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-              <p className="text-amber-400 text-sm font-medium mb-2"> Ready to get started?</p>
-              <p className="text-slate-300 text-sm">Fill out the inquiry form and our specialist will contact you within 24 hours.</p>
-            </div>
           </div>
 
-          {/* Right Column - Inquiry Form */}
           <ServiceInquiry serviceName="Vehicle Import/Export" />
         </div>
       </div>
