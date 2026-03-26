@@ -1,11 +1,12 @@
 ﻿'use client'
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { User } from '@supabase/supabase-js'
+import { supabase } from '../../lib/supabase'
 import { User, FileText, CreditCard, LogOut, ArrowLeft, Clock, CheckCircle, XCircle } from 'lucide-react'
 import Link from 'next/link'
 
 export default function PortalPage() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [profile, setProfile] = useState(null)
   const [enrollments, setEnrollments] = useState([])
   const [transactions, setTransactions] = useState([])
@@ -20,7 +21,7 @@ export default function PortalPage() {
   const checkUser = async () => {
     const { data: { session } } = await supabase.auth.getSession()
     if (session?.user) {
-      setUser(session.user)
+      setUser(session?.user ?? null)
       await loadUserData(session.user.id)
     }
     setLoading(false)
@@ -181,7 +182,7 @@ export default function PortalPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={px-4 py-2 capitalize transition }
+              className="px-4 py-2 capitalize transition"
             >
               {tab}
             </button>
@@ -206,7 +207,7 @@ export default function PortalPage() {
                           Enrolled: {new Date(enrollment.enrollment_date).toLocaleDateString()}
                         </p>
                       </div>
-                      <span className={px-2 py-1 rounded-full text-xs }>
+                      <span className="px-2 py-1 rounded-full text-xs">
                         {enrollment.status}
                       </span>
                     </div>
@@ -227,7 +228,7 @@ export default function PortalPage() {
                       <div>
                         <p className="text-white font-medium">{tx.description || 'Payment'}</p>
                         <p className="text-slate-400 text-sm">
-                          {new Date(tx.created_at).toLocaleDateString()} • {tx.payment_method}
+                          {new Date(tx.created_at).toLocaleDateString()} Ã¢â‚¬Â¢ {tx.payment_method}
                         </p>
                       </div>
                       <p className="text-green-400 font-bold">AED {tx.amount?.toFixed(2)}</p>
@@ -256,7 +257,7 @@ export default function PortalPage() {
                   <div key={enrollment.id} className="border border-slate-700 rounded-lg p-4">
                     <div className="flex justify-between items-start mb-3">
                       <h4 className="text-lg font-semibold text-white">{enrollment.service_type}</h4>
-                      <span className={px-2 py-1 rounded-full text-xs }>
+                      <span className="px-2 py-1 rounded-full text-xs">
                         {enrollment.status}
                       </span>
                     </div>

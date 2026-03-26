@@ -1,6 +1,7 @@
 ﻿'use client'
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { User } from '@supabase/supabase-js'
+import { supabase } from '../../lib/supabase'
 import { 
   Users, Briefcase, CreditCard, FileText, 
   TrendingUp, Settings, LogOut, Bell, 
@@ -11,7 +12,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 export default function AdminDashboard() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
     totalClients: 0,
@@ -48,7 +49,7 @@ export default function AdminDashboard() {
       return
     }
 
-    setUser(session.user)
+    setUser(session?.user ?? null)
     await loadDashboardData()
     setLoading(false)
   }
@@ -247,7 +248,7 @@ export default function AdminDashboard() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={px-4 py-2 capitalize transition }
+                className="px-4 py-2 capitalize transition"
               >
                 {tab}
               </button>
@@ -385,7 +386,7 @@ export default function AdminDashboard() {
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <p className="text-white font-medium">{inquiry.name}</p>
-                        <p className="text-slate-400 text-sm">{inquiry.email} • {inquiry.phone || 'No phone'}</p>
+                        <p className="text-slate-400 text-sm">{inquiry.email} Ã¢â‚¬Â¢ {inquiry.phone || 'No phone'}</p>
                       </div>
                       <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs">
                         New

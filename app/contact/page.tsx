@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send, MessageSquare, Sparkles, Building, Globe, ArrowRight } from 'lucide-react'
 

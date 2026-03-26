@@ -1,8 +1,10 @@
-﻿import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import ServiceInquiry from '@/components/ServiceInquiry'
+﻿'use client'
 
-export default function B2BConsultancyPage() {
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import ServiceInquiry from '../../../components/ServiceInquiry'
+
+export default function Page() {
   const serviceFeatures = [
     'Market entry strategies',
     'Partnership development',
@@ -23,12 +25,9 @@ export default function B2BConsultancyPage() {
           <div>
             <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
               <img 
-                src="/images/b2b-consultancy/B2Bmeetings.jpg"
+                src="/images/b2b-consultancy/B2Bmeetings.jpg" 
                 alt="B2B Consultancy"
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.src = '/images/placeholders/placeholder.svg'
-                }}
               />
             </div>
             
@@ -41,7 +40,7 @@ export default function B2BConsultancyPage() {
               <h2 className="text-2xl font-bold text-white mb-4">What We Offer:</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {serviceFeatures.map((feature, index) => (
-                  <li key={index} className="text-slate-300">✓ {feature}</li>
+                  <li key={index} className="text-slate-300"> {feature}</li>
                 ))}
               </ul>
             </div>

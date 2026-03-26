@@ -1,16 +1,17 @@
-﻿import Link from 'next/link'
-import Image from 'next/image'
+﻿'use client'
+
+import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import ServiceInquiry from '@/components/ServiceInquiry'
+import ServiceInquiry from '../../../components/ServiceInquiry'
 
 export default function Page() {
   const serviceFeatures = [
-    'Document clearing',
-    'Official approvals',
-    'PRO services',
-    'Corporate compliance',
-    'License processing',
-    'Government tenders'
+    'Market entry strategies',
+    'Partnership development',
+    'Corporate growth planning',
+    'Cross-border business advisory',
+    'Investment opportunities',
+    'Trade facilitation'
   ]
 
   return (
@@ -21,14 +22,12 @@ export default function Page() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column - Service Info */}
           <div>
-            <div className="relative h-80 rounded-xl overflow-hidden mb-6">
-              <Image 
-                src="/images/government-liaison/Governmenttenders.jpg"
+            <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
+              <img 
+                src="/images/government-liaison/Governmenttenders.jpg" 
                 alt="Government Liaison"
-                fill
-                className="object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
             
@@ -45,14 +44,8 @@ export default function Page() {
                 ))}
               </ul>
             </div>
-            
-            <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-              <p className="text-amber-400 text-sm font-medium mb-2"> Ready to get started?</p>
-              <p className="text-slate-300 text-sm">Fill out the inquiry form and our specialist will contact you within 24 hours.</p>
-            </div>
           </div>
 
-          {/* Right Column - Inquiry Form */}
           <ServiceInquiry serviceName="Government Liaison" />
         </div>
       </div>
