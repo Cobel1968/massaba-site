@@ -2,42 +2,12 @@
 import Image from 'next/image';
 
 const services = [
-  { 
-    slug: 'b2b-consultancy', 
-    title: 'B2B Consultancy', 
-    desc: 'Strategic advisory for corporate growth and high-value partnerships across Africa and global markets.', 
-    image: '/images/b2b-consultancy/B2Bmeetings.jpg' 
-  },
-  { 
-    slug: 'education', 
-    title: 'Education Consultancy', 
-    desc: 'Expert guidance for university admissions and international studies.', 
-    image: '/images/education/AccueilAssure.jpg' 
-  },
-  { 
-    slug: 'government-liaison', 
-    title: 'Government Liaison', 
-    desc: 'Seamless PRO services and official approvals.', 
-    image: '/images/government-liaison/Governmenttenders.jpg' 
-  },
-  { 
-    slug: 'omra-travel', 
-    title: 'Omra Travel', 
-    desc: 'Premium spiritual journey packages to the Holy Cities.', 
-    image: '/images/omra-travel/Umrah.jpg' 
-  },
-  { 
-    slug: 'visa-services', 
-    title: 'Visa & Mobility Services', 
-    desc: 'Visitor, business, and golden visa assistance.', 
-    image: '/images/visa-services/Abudhabigrandmosque.jpg' 
-  },
-  { 
-    slug: 'vehicle-import-export', 
-    title: 'Vehicle Import/Export', 
-    desc: 'Secure global sourcing and logistics for vehicles.', 
-    image: '/images/vehicle-import-export/Mercedes4maticfront.jpg' 
-  },
+  { slug: 'b2b-consultancy', title: 'B2B Consultancy', desc: 'Strategic advisory for corporate growth and high-value partnerships.', image: '/images/b2b-consultancy/B2Bmeetings.jpg' },
+  { slug: 'education', title: 'Education Consultancy', desc: 'Expert guidance for university admissions and international studies.', image: '/images/education/AccueilAssure.jpg' },
+  { slug: 'government-liaison', title: 'Government Liaison', desc: 'Seamless PRO services and official approvals.', image: '/images/government-liaison/Governmenttenders.jpg' },
+  { slug: 'omra-travel', title: 'Omra Travel', desc: 'Premium spiritual journey packages.', image: '/images/omra-travel/Umrah.jpg' },
+  { slug: 'visa-services', title: 'Visa & Mobility Services', desc: 'Visitor, business, and golden visa assistance.', image: '/images/visa-services/Abudhabigrandmosque.jpg' },
+  { slug: 'vehicle-import-export', title: 'Vehicle Import/Export', desc: 'Secure global sourcing and logistics for vehicles.', image: '/images/vehicle-import-export/Mercedes4maticfront.jpg' },
 ];
 
 export default function ServicesPage() {
@@ -46,9 +16,7 @@ export default function ServicesPage() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">Nos Services</h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Des solutions complètes et professionnelles pour vos besoins internationaux
-          </p>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">Des solutions complètes et professionnelles pour vos besoins internationaux</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
