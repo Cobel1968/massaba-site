@@ -52,6 +52,37 @@ export default function AboutPage() {
             <div className="text-slate-400 text-sm">Success Rate</div>
           </div>
         </div>
+
+        {/* Trusted Partners Section */}
+        <div className="bg-slate-800 rounded-xl p-8 mb-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-white mb-2">Trusted Business Partners</h2>
+            <p className="text-slate-400">Proud to collaborate with industry leaders</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Partner 1 - REALIN-TRANSITAD */}
+            <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition">
+              <div className="w-24 h-24 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center border border-amber-500/30">
+                <div className="text-center">
+                  <span className="text-2xl font-bold text-amber-500">RTA</span>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">REALIN-TRANSITAD</h3>
+              <p className="text-slate-400 text-sm">Trusted Logistics & Transit Partner</p>
+            </div>
+
+            {/* Partner 2 - CBTC */}
+            <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition">
+              <div className="w-24 h-24 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center border border-amber-500/30">
+                <div className="text-center">
+                  <span className="text-2xl font-bold text-amber-500">CBTG</span>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">CBTC</h3>
+              <p className="text-slate-400 text-sm">DU BANG AU TRAVEL | Travel & Tourism Partner</p>
+            </div>
+          </div>
+        </div>
         
         <div className="bg-slate-800 rounded-xl p-8">
           <div className="text-center mb-8">
@@ -103,11 +134,11 @@ export default function AboutPage() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-3">Contact Information</h2>
               <div className="space-y-2 text-slate-300">
-                <p>📧 {COMPANY_INFO.email}</p>
-                <p>📞 {COMPANY_INFO.phone}</p>
-                <p>💬 WhatsApp: {COMPANY_INFO.whatsapp}</p>
-                <p>📍 {COMPANY_INFO.address}</p>
-                <p>⏰ {COMPANY_INFO.businessHours}</p>
+                <p> {COMPANY_INFO.email}</p>
+                <p> {COMPANY_INFO.phone}</p>
+                <p> WhatsApp: {COMPANY_INFO.whatsapp}</p>
+                <p> {COMPANY_INFO.address}</p>
+                <p> {COMPANY_INFO.businessHours}</p>
               </div>
             </div>
             
@@ -116,12 +147,12 @@ export default function AboutPage() {
               <div className="flex gap-4">
                 {SOCIAL_LINKS.instagram && (
                   <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                    📷 Instagram
+                     Instagram
                   </a>
                 )}
                 {SOCIAL_LINKS.facebook && (
                   <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                    📘 Facebook
+                     Facebook
                   </a>
                 )}
               </div>

@@ -1,19 +1,31 @@
-﻿export default function PartnerBanner() {
+﻿import Link from 'next/link'
+
+export default function PartnerBanner() {
   return (
     <div className="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 border border-amber-500/20">
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-4">
-          <div className="relative w-16 h-16 overflow-hidden rounded-lg bg-white/5 flex items-center justify-center border border-slate-700">
-            <img src="/images/shared/rita_logo_elephant_hq.png" alt="Rita Services" className="w-full h-full object-contain p-2" />
+      <div className="text-center mb-4">
+        <h3 className="text-white font-bold text-lg">Our Trusted Partners</h3>
+        <p className="text-slate-400 text-sm">Strategic partnerships delivering excellence</p>
+      </div>
+      <div className="flex flex-wrap justify-center gap-8">
+        {/* REALIN-TRANSITAD Partner */}
+        <div className="flex flex-col items-center">
+          <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-slate-700">
+            <div className="text-center">
+              <span className="text-xl font-bold text-amber-500">RTA</span>
+            </div>
           </div>
-          <div>
-            <h3 className="text-white font-semibold">Official Partner</h3>
-            <p className="text-amber-500 text-sm font-medium">Rita Services</p>
-            <p className="text-slate-400 text-xs">Strategic Partnership Since 2015</p>
-          </div>
+          <p className="text-slate-400 text-xs mt-2">REALIN-TRANSITAD</p>
         </div>
-        <div className="bg-amber-500/10 px-4 py-2 rounded-full">
-          <p className="text-amber-400 text-sm"> Trusted Partner</p>
+
+        {/* CBTC Partner */}
+        <div className="flex flex-col items-center">
+          <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center border border-slate-700">
+            <div className="text-center">
+              <span className="text-xl font-bold text-amber-500">CBTG</span>
+            </div>
+          </div>
+          <p className="text-slate-400 text-xs mt-2">CBTC</p>
         </div>
       </div>
     </div>
