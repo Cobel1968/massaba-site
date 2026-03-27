@@ -73,7 +73,7 @@ export default function ContactPage() {
         response = " Government Liaison: We handle PRO services, document clearing, and official approvals. We ensure 100% compliance and fast processing times. How can we assist you?"
       }
       else {
-        response = " Thank you for reaching out to Massaba Consulting! One of our specialists will contact you within 24 hours. In the meantime, you can call us at +971 525 019 802. How else can I help you today?"
+        response = " Thank you for reaching out to Massaba Consulting! One of our specialists will contact you within 24 hours. In the meantime, you can call us at {COMPANY_INFO.phone}. How else can I help you today?"
       }
       
       setAiResponse(response)
@@ -126,7 +126,7 @@ export default function ContactPage() {
                   <div>
                     <p className="text-slate-400 text-sm font-medium mb-1">Phone & WhatsApp</p>
                     <a href="tel:{process.env.NEXT_PUBLIC_COMPANY_PHONE}" className="text-white hover:text-amber-500 transition block mb-1">
-                      +971 525 019 802
+                      {COMPANY_INFO.phone}
                     </a>
                     <a href="https://wa.me/971525019802" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 transition text-sm inline-flex items-center gap-1">
                       WhatsApp <ArrowRight size={12} />
