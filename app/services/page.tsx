@@ -1,93 +1,83 @@
-﻿'use client'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+﻿import Link from 'next/link';
+import Image from 'next/image';
 
 const services = [
-  {
-    id: 1,
-    slug: 'b2b-consultancy',
-    title: 'B2B Consultancy',
-    description: 'Strategic advisory for corporate growth and high-value partnerships across Africa and global markets.',
-    image: '/images/b2b-consultancy/B2Bmeetings.jpg'
+  { 
+    slug: 'b2b-consultancy', 
+    title: 'B2B Consultancy', 
+    desc: 'Strategic advisory for corporate growth and high-value partnerships across Africa and global markets.', 
+    image: '/images/b2b-consultancy/B2Bmeetings.jpg' 
   },
-  {
-    id: 2,
-    slug: 'education',
-    title: 'Education Consultancy',
-    description: 'Expert guidance for international students seeking admission to top-tier universities in Europe and the UK.',
-    image: '/images/education/AccueilAssure.jpg'
+  { 
+    slug: 'education', 
+    title: 'Education Consultancy', 
+    desc: 'Expert guidance for university admissions and international studies.', 
+    image: '/images/education/AccueilAssure.jpg' 
   },
-  {
-    id: 3,
-    slug: 'government-liaison',
-    title: 'Government Liaison',
-    description: 'Seamless PRO services, document clearing, and official approvals for corporate compliance.',
-    image: '/images/government-liaison/Governmenttenders.jpg'
+  { 
+    slug: 'government-liaison', 
+    title: 'Government Liaison', 
+    desc: 'Seamless PRO services and official approvals.', 
+    image: '/images/government-liaison/Governmenttenders.jpg' 
   },
-  {
-    id: 4,
-    slug: 'omra-travel',
-    title: 'Omra Travel',
-    description: 'Premium spiritual journey packages including VIP accommodation and professional guides.',
-    image: '/images/omra-travel/Umrah.jpg'
+  { 
+    slug: 'omra-travel', 
+    title: 'Omra Travel', 
+    desc: 'Premium spiritual journey packages to the Holy Cities.', 
+    image: '/images/omra-travel/Umrah.jpg' 
   },
-  {
-    id: 5,
-    slug: 'visa-services',
-    title: 'Visa & Mobility Services',
-    description: 'Visitor, business, and golden visa assistance for Gulf countries and selected destinations.',
-    image: '/images/visa-services/Abudhabigrandmosque.jpg'
+  { 
+    slug: 'visa-services', 
+    title: 'Visa & Mobility Services', 
+    desc: 'Visitor, business, and golden visa assistance.', 
+    image: '/images/visa-services/Abudhabigrandmosque.jpg' 
   },
-  {
-    id: 6,
-    slug: 'vehicle-import-export',
-    title: 'Vehicle Import/Export',
-    description: 'Source new and used vehicles globally with expert logistics and shipping.',
-    image: '/images/vehicle-import-export/MercedesF4matic.jpeg'
-  }
-]
+  { 
+    slug: 'vehicle-import-export', 
+    title: 'Vehicle Import/Export', 
+    desc: 'Secure global sourcing and logistics for vehicles.', 
+    image: '/images/vehicle-import-export/Mercedes4maticfront.jpg' 
+  },
+];
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-slate-950 pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Services</h1>
+    <div className="min-h-screen bg-slate-950 py-20 px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">Nos Services</h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to your international needs
+            Des solutions complètes et professionnelles pour vos besoins internationaux
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => {
-            const hrefPath = '/services/' + service.slug
-            return (
-              <Link key={service.id} href={hrefPath}>
-                <div className="bg-slate-800 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-amber-500/20 transition-all duration-300 cursor-pointer group">
-                  <div className="h-56 overflow-hidden bg-slate-700">
-                    <img 
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-amber-500 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {service.description}
-                    </p>
-                    <div className="mt-4 text-amber-500 font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Learn More <ArrowRight size={14} />
-                    </div>
-                  </div>
+          {services.map((service) => (
+            <Link 
+              key={service.slug} 
+              href={`/services/${service.slug}`}
+              className="group block bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 hover:border-amber-500 hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+            >
+              <div className="relative h-64 bg-slate-800">
+                <Image 
+                  src={service.image} 
+                  alt={service.title}
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-1">
+                <h3 className="text-2xl font-semibold text-white mb-4">{service.title}</h3>
+                <p className="text-slate-400 flex-1 leading-relaxed">{service.desc}</p>
+                <div className="mt-6 text-amber-400 font-medium group-hover:text-amber-300 inline-flex items-center">
+                  Découvrir le service 
+                  <span className="ml-2"></span>
                 </div>
-              </Link>
-            )
-          })}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
