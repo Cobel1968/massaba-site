@@ -1,28 +1,27 @@
-﻿'use client'
+﻿"use client";
 
 import Link from 'next/link'
-import PartnerBanner from '../../components/PartnerBanner'
+import { ArrowLeft } from 'lucide-react'
+import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-950 pt-24 pb-20">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <div className="relative w-24 h-24 mx-auto mb-6 overflow-hidden rounded-xl bg-white/5 flex items-center justify-center border border-slate-700">
-            <Image
-              src="/massaba-logo.png"
-              alt="Massaba Consulting"
-              width={96}
-              height={96}
-              className="object-contain"
-            />
-          </div>
-          <h1 className="text-4xl font-bold text-white mb-4">About Massaba Consulting</h1>
-          <p className="text-xl text-slate-400">Connecting People & Opportunities Since 2010</p>
-        </div>
+        <Link href="/" className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 mb-8">
+          <ArrowLeft size={20} /> Back to Home
+        </Link>
         
-        <div className="space-y-6">
-          <div className="bg-slate-800 rounded-xl p-8 space-y-6">
+        <div className="bg-slate-800 rounded-xl p-8">
+          <div className="text-center mb-8">
+            <div className="w-24 h-24 mx-auto mb-6 bg-amber-500 rounded-full flex items-center justify-center">
+              <span className="text-3xl font-bold text-slate-900">M</span>
+            </div>
+            <h1 className="text-4xl font-bold text-white mb-4">About Massaba Consulting</h1>
+            <p className="text-xl text-slate-400">Connecting People & Opportunities Since 2010</p>
+          </div>
+          
+          <div className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold text-white mb-3">Our Mission</h2>
               <p className="text-slate-300 leading-relaxed">
@@ -40,38 +39,31 @@ export default function AboutPage() {
             </div>
             
             <div>
-              <h2 className="text-2xl font-bold text-white mb-3">Our Values</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-slate-700/50 rounded-lg p-4">
-                  <h3 className="text-amber-500 font-semibold mb-2">Excellence</h3>
-                  <p className="text-slate-300 text-sm">Delivering the highest quality service</p>
-                </div>
-                <div className="bg-slate-700/50 rounded-lg p-4">
-                  <h3 className="text-amber-500 font-semibold mb-2">Integrity</h3>
-                  <p className="text-slate-300 text-sm">Honest and transparent business practices</p>
-                </div>
-                <div className="bg-slate-700/50 rounded-lg p-4">
-                  <h3 className="text-amber-500 font-semibold mb-2">Innovation</h3>
-                  <p className="text-slate-300 text-sm">Creative solutions for complex challenges</p>
-                </div>
-                <div className="bg-slate-700/50 rounded-lg p-4">
-                  <h3 className="text-amber-500 font-semibold mb-2">Partnership</h3>
-                  <p className="text-slate-300 text-sm">Building lasting relationships with clients</p>
-                </div>
+              <h2 className="text-2xl font-bold text-white mb-3">Contact Information</h2>
+              <div className="space-y-2 text-slate-300">
+                <p> {COMPANY_INFO.email}</p>
+                <p> {COMPANY_INFO.phone}</p>
+                <p> WhatsApp: {COMPANY_INFO.whatsapp}</p>
+                <p> {COMPANY_INFO.address}</p>
+                <p> {COMPANY_INFO.businessHours}</p>
               </div>
             </div>
-          </div>
-          
-          {/* Partner Banner */}
-          <PartnerBanner />
-          
-          <div className="text-center pt-4">
-            <Link 
-              href="/contact" 
-              className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-8 py-3 rounded-full transition"
-            >
-              Get in Touch
-            </Link>
+            
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-3">Follow Us</h2>
+              <div className="flex gap-4">
+                {SOCIAL_LINKS.instagram && (
+                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
+                     Instagram
+                  </a>
+                )}
+                {SOCIAL_LINKS.facebook && (
+                  <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
+                     Facebook
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

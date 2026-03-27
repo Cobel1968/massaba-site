@@ -1,0 +1,19 @@
+﻿# Ignore development files
+.git
+.github
+.vscode
+node_modules
+.next
+
+# Ignore logs
+*.log
+npm-debug.log*
+
+# Ignore environment files
+.env
+.env.local
+.env.*.local
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

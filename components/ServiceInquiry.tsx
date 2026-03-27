@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, Phone, Mail } from "lucide-react";
+import { COMPANY_INFO } from "@/lib/constants";
 
 export default function ServiceInquiry({ serviceName }) {
   const [formData, setFormData] = useState({
@@ -42,11 +43,46 @@ export default function ServiceInquiry({ serviceName }) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Name *" className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white" />
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="Email *" className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white" />
-          <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="Phone *" className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white" />
-          <textarea name="message" value={formData.message} onChange={handleChange} rows={3} placeholder="Your message..." className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white resize-none"></textarea>
-          <button type="submit" disabled={isSubmitting} className="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold py-2 rounded-lg disabled:opacity-50">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder="Your Name *"
+            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="Email *"
+            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          />
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            placeholder="Phone *"
+            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+          />
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={3}
+            placeholder="Your message..."
+            className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white resize-none"
+          ></textarea>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold py-2 rounded-lg disabled:opacity-50"
+          >
             {isSubmitting ? "Sending..." : "Send Inquiry"}
           </button>
         </form>
@@ -54,8 +90,18 @@ export default function ServiceInquiry({ serviceName }) {
       <div className="mt-6 pt-6 border-t border-slate-700">
         <p className="text-slate-400 text-sm text-center mb-3">Or contact us directly:</p>
         <div className="flex gap-3">
-          <a href="tel:{COMPANY_INFO.phone}" className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"><Phone size={14} /> Call</a>
-          <a href="mailto:{COMPANY_INFO.email}" className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"><Mail size={14} /> Email</a>
+          <a
+            href={`tel:${COMPANY_INFO.phone}`}
+            className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"
+          >
+            <Phone size={14} /> Call
+          </a>
+          <a
+            href={`mailto:${COMPANY_INFO.email}`}
+            className="flex-1 flex items-center justify-center gap-2 bg-slate-700 hover:bg-slate-600 text-white text-sm py-2 rounded-lg"
+          >
+            <Mail size={14} /> Email
+          </a>
         </div>
       </div>
     </div>

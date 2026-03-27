@@ -1,4 +1,5 @@
 ﻿'use client'
+import { COMPANY_INFO } from '@/lib/constants'
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send, MessageSquare, Sparkles, Building, Globe, ArrowRight } from 'lucide-react'
 
