@@ -14,8 +14,17 @@ export default function AboutPage() {
         
         <div className="bg-slate-800 rounded-xl p-8">
           <div className="text-center mb-8">
+            {/* Logo */}
             <div className="w-24 h-24 mx-auto mb-6 bg-amber-500 rounded-full flex items-center justify-center">
-              <span className="text-3xl font-bold text-slate-900">M</span>
+              <img 
+                src="/massaba-logo.png" 
+                alt="Massaba Consulting" 
+                className="w-16 h-16 object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<span className="text-4xl font-bold text-slate-900">M</span>';
+                }}
+              />
             </div>
             <h1 className="text-4xl font-bold text-white mb-4">About Massaba Consulting</h1>
             <p className="text-xl text-slate-400">Connecting People & Opportunities Since 2010</p>

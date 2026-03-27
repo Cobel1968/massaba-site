@@ -1,12 +1,12 @@
 ﻿import type { Metadata } from 'next'
 import './globals.css'
-import { COMPANY_INFO } from '@/lib/constants'
-import Navbar from '../components/navbar'
+import Navbar from '@/components/navbar'
+import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Massaba Consulting | Connecting People & Opportunities',
-  description: 'Expert services in B2B consultancy, education, government liaison, visa services, Omra travel, and vehicle import/export.',
+  description: 'Expert services in B2B consultancy, university placement, government liaison, visa assistance, Omra travel, and vehicle import/export.',
 }
 
 export default function RootLayout({
@@ -21,15 +21,74 @@ export default function RootLayout({
         <main className="pt-16">
           {children}
         </main>
-        <footer className="border-t border-slate-800 bg-slate-900 py-8 mt-20">
+        <footer className="border-t border-slate-800 bg-slate-900 py-12">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex items-center gap-2">
-                <img src="/massaba-logo.png" alt="Massaba" className="h-8 w-auto" />
-                <span className="text-white font-bold">Massaba Consulting</span>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {/* Logo Section */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">M</span>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-lg">Massaba</h3>
+                    <p className="text-amber-500 text-xs">Consulting</p>
+                  </div>
+                </div>
+                <p className="text-slate-400 text-sm">
+                  Connecting People & Opportunities
+                </p>
               </div>
+              
+              {/* Quick Links */}
+              <div>
+                <h3 className="text-white font-bold mb-4">Quick Links</h3>
+                <ul className="space-y-2">
+                  <li><Link href="/" className="text-slate-400 hover:text-amber-500 text-sm transition">Home</Link></li>
+                  <li><Link href="/services" className="text-slate-400 hover:text-amber-500 text-sm transition">Services</Link></li>
+                  <li><Link href="/about" className="text-slate-400 hover:text-amber-500 text-sm transition">About Us</Link></li>
+                  <li><Link href="/contact" className="text-slate-400 hover:text-amber-500 text-sm transition">Contact</Link></li>
+                </ul>
+              </div>
+              
+              {/* Contact Info */}
+              <div>
+                <h3 className="text-white font-bold mb-4">Contact</h3>
+                <p className="text-slate-400 text-sm">
+                  Tel: {COMPANY_INFO.phone}<br />
+                  WhatsApp: {COMPANY_INFO.whatsapp}<br />
+                  Email: {COMPANY_INFO.email}
+                </p>
+              </div>
+              
+              {/* Address & Hours */}
+              <div>
+                <h3 className="text-white font-bold mb-4">Address</h3>
+                <p className="text-slate-400 text-sm">
+                  {COMPANY_INFO.address}
+                </p>
+                <h3 className="text-white font-bold mt-4 mb-2">Hours</h3>
+                <p className="text-slate-400 text-sm">
+                  {COMPANY_INFO.businessHours}
+                </p>
+                <div className="flex gap-3 mt-4">
+                  {SOCIAL_LINKS.instagram && (
+                    <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
+                      📷
+                    </a>
+                  )}
+                  {SOCIAL_LINKS.facebook && (
+                    <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
+                      📘
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            <div className="border-t border-slate-800 mt-8 pt-8 text-center">
               <p className="text-slate-500 text-sm">
-                &copy; {new Date().getFullYear()} All rights reserved.
+                &copy; {new Date().getFullYear()} Massaba Consulting. All rights reserved.
               </p>
             </div>
           </div>
