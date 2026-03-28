@@ -55,20 +55,17 @@ export default function AdminDashboard() {
   }
 
   const loadDashboardData = async () => {
-    // Get total clients
     const { count: clientCount } = await supabase
       .from('clients')
       .select('*', { count: 'exact', head: true })
     setStats(prev => ({ ...prev, totalClients: clientCount || 0 }))
 
-    // Get active services
     const { count: serviceCount } = await supabase
       .from('service_enrollments')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'active')
     setStats(prev => ({ ...prev, activeServices: serviceCount || 0 }))
 
-    // Get total revenue
     const { data: revenueData } = await supabase
       .from('transactions')
       .select('amount')
@@ -76,14 +73,12 @@ export default function AdminDashboard() {
     const totalRevenue = revenueData?.reduce((sum, t) => sum + (t.amount || 0), 0) || 0
     setStats(prev => ({ ...prev, totalRevenue }))
 
-    // Get pending invoices
     const { count: invoiceCount } = await supabase
       .from('invoices')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'pending')
     setStats(prev => ({ ...prev, pendingInvoices: invoiceCount || 0 }))
 
-    // Get monthly revenue
     const startOfMonth = new Date()
     startOfMonth.setDate(1)
     startOfMonth.setHours(0, 0, 0, 0)
@@ -96,14 +91,12 @@ export default function AdminDashboard() {
     const monthlyRevenue = monthlyData?.reduce((sum, t) => sum + (t.amount || 0), 0) || 0
     setStats(prev => ({ ...prev, monthlyRevenue }))
 
-    // Get pending inquiries
     const { count: inquiryCount } = await supabase
       .from('contact_inquiries')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'new')
     setStats(prev => ({ ...prev, pendingInquiries: inquiryCount || 0 }))
 
-    // Get recent transactions
     const { data: transactions } = await supabase
       .from('transactions')
       .select('*, clients(full_name, client_number)')
@@ -111,7 +104,6 @@ export default function AdminDashboard() {
       .limit(10)
     setRecentTransactions(transactions || [])
 
-    // Get recent clients
     const { data: clients } = await supabase
       .from('clients')
       .select('*')
@@ -119,7 +111,6 @@ export default function AdminDashboard() {
       .limit(10)
     setRecentClients(clients || [])
 
-    // Get pending inquiries
     const { data: inquiries } = await supabase
       .from('contact_inquiries')
       .select('*')
@@ -142,6 +133,7 @@ export default function AdminDashboard() {
     )
   }
 
+  // Define tabs including POS
   const tabs = ['overview', 'clients', 'transactions', 'invoices', 'inquiries', 'pos']
 
   return (
@@ -222,19 +214,19 @@ export default function AdminDashboard() {
             </div>
           )}
 
-          {/* Tabs */}
-          <div className="flex gap-4 border-b border-slate-800 mb-6 overflow-x-auto">
+          {/* Tabs - Fixed display */}
+          <div className="flex gap-2 md:gap-4 border-b border-slate-800 mb-6 overflow-x-auto pb-1">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className="px-4 py-2 capitalize transition"
+                className="px-3 md:px-4 py-2 capitalize text-sm md:text-base whitespace-nowrap transition"
                 style={{
                   color: activeTab === tab ? '#f59e0b' : '#94a3b8',
                   borderBottom: activeTab === tab ? '2px solid #f59e0b' : 'none'
                 }}
               >
-                {tab === 'pos' ? 'POS System' : tab}
+                {tab === 'pos' ? '💰 POS System' : tab === 'overview' ? '📊 Overview' : tab === 'clients' ? '👥 Clients' : tab === 'transactions' ? '💳 Transactions' : tab === 'invoices' ? '📄 Invoices' : tab === 'inquiries' ? '✉️ Inquiries' : tab}
               </button>
             ))}
           </div>
@@ -282,7 +274,7 @@ export default function AdminDashboard() {
                       <th className="text-left py-3 text-slate-400">Email</th>
                       <th className="text-left py-3 text-slate-400">Phone</th>
                       <th className="text-left py-3 text-slate-400">Joined</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
                     {recentClients.map((client) => (
@@ -297,6 +289,48 @@ export default function AdminDashboard() {
                   </tbody>
                 </table>
               </div>
+            </div>
+          )}
+
+          {activeTab === 'transactions' && (
+            <div className="bg-slate-800 rounded-xl p-6">
+              <h3 className="text-white font-semibold mb-4">Transaction History</h3>
+              {recentTransactions.map((tx) => (
+                <div key={tx.id} className="flex justify-between items-center p-3 bg-slate-700/50 rounded-lg mb-2">
+                  <div>
+                    <p className="text-white text-sm font-medium">{tx.clients?.full_name || 'N/A'}</p>
+                    <p className="text-slate-400 text-xs">{new Date(tx.created_at).toLocaleDateString()} • {tx.payment_method}</p>
+                  </div>
+                  <p className="text-green-400 font-bold">AED {tx.amount?.toFixed(2)}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'invoices' && (
+            <div className="bg-slate-800 rounded-xl p-6">
+              <h3 className="text-white font-semibold mb-4">Invoices</h3>
+              <p className="text-slate-400">No invoices yet. Create one using the POS system.</p>
+            </div>
+          )}
+
+          {activeTab === 'inquiries' && (
+            <div className="bg-slate-800 rounded-xl p-6">
+              <h3 className="text-white font-semibold mb-4">Pending Inquiries</h3>
+              {pendingInquiries.map((inquiry) => (
+                <div key={inquiry.id} className="border border-slate-700 rounded-lg p-4 mb-3">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <p className="text-white font-medium">{inquiry.name}</p>
+                      <p className="text-slate-400 text-sm">{inquiry.email} • {inquiry.phone || 'No phone'}</p>
+                    </div>
+                    <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs">New</span>
+                  </div>
+                  <p className="text-slate-300 text-sm mb-3">{inquiry.message}</p>
+                  <button className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 px-3 py-1 rounded-lg text-sm transition">Mark as Read</button>
+                </div>
+              ))}
+              {pendingInquiries.length === 0 && <p className="text-slate-400">No pending inquiries</p>}
             </div>
           )}
 
