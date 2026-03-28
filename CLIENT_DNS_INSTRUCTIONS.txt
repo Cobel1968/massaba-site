@@ -1,0 +1,59 @@
+﻿========================================
+DNS SETUP INSTRUCTIONS - HOSTINGER
+========================================
+Domain: massaba.app
+
+
+
+STEP 1: LOGIN TO HOSTINGER
+
+Go to: https://www.hostinger.com
+Login with your credentials
+
+
+STEP 2: FIND DNS ZONE EDITOR
+
+1. Click "Domains" in left sidebar
+2. Click "Manage" next to massaba.app
+3. Click "DNS / Nameservers" tab
+4. Click "DNS Zone Editor"
+
+
+STEP 3: ADD A RECORD
+
+Type: A
+Name: @
+Points to: 76.76.21.21
+TTL: 14400
+
+Click "Add Record"
+
+
+STEP 4: ADD CNAME RECORD
+
+Type: CNAME
+Name: www
+Points to: cname.vercel-dns.com
+TTL: 14400
+
+Click "Add Record"
+
+
+STEP 5: ADD TXT RECORD (VERIFICATION)
+
+Type: TXT
+Name: @
+Points to: vc-domain-verify=YOUR_CODE_HERE
+TTL: 14400
+
+Click "Add Record"
+
+VERIFICATION CODE: [Paste code from Vercel here]
+
+
+STEP 6: WAIT
+
+Wait 5-30 minutes for DNS to update
+The website will automatically go live at:
+https://massaba.app
+

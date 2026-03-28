@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowLeft, Briefcase, Globe, Award, Users } from 'lucide-react'
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 
@@ -16,8 +15,17 @@ export default function AboutPage() {
         {/* Founder Hero Section */}
         <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-2xl p-8 mb-12 border border-amber-500/20">
           <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-              <span className="text-5xl font-bold text-slate-900">CB</span>
+            {/* Founder Image - Using elephant logo as placeholder */}
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center flex-shrink-0 border-2 border-amber-500/50">
+              <img 
+                src="/images/partners/rita_logo_elephant_hq.png" 
+                alt="Massaba Consulting"
+                className="w-24 h-24 object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<span class="text-5xl font-bold text-amber-500">M</span>';
+                }}
+              />
             </div>
             <div className="text-center md:text-left">
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Mr. Coulibaly Brahima</h1>
@@ -32,22 +40,22 @@ export default function AboutPage() {
 
         {/* Experience Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="bg-slate-800 rounded-xl p-4 text-center">
+          <div className="bg-slate-800 rounded-xl p-4 text-center hover:bg-slate-700 transition">
             <Globe className="w-8 h-8 text-amber-500 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">15+</div>
             <div className="text-slate-400 text-sm">Years Experience</div>
           </div>
-          <div className="bg-slate-800 rounded-xl p-4 text-center">
+          <div className="bg-slate-800 rounded-xl p-4 text-center hover:bg-slate-700 transition">
             <Briefcase className="w-8 h-8 text-amber-500 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">20+</div>
             <div className="text-slate-400 text-sm">Countries Served</div>
           </div>
-          <div className="bg-slate-800 rounded-xl p-4 text-center">
+          <div className="bg-slate-800 rounded-xl p-4 text-center hover:bg-slate-700 transition">
             <Users className="w-8 h-8 text-amber-500 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">500+</div>
             <div className="text-slate-400 text-sm">Clients Served</div>
           </div>
-          <div className="bg-slate-800 rounded-xl p-4 text-center">
+          <div className="bg-slate-800 rounded-xl p-4 text-center hover:bg-slate-700 transition">
             <Award className="w-8 h-8 text-amber-500 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">100%</div>
             <div className="text-slate-400 text-sm">Success Rate</div>
@@ -61,54 +69,46 @@ export default function AboutPage() {
             <p className="text-slate-400">Proud to collaborate with industry leaders</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Partner 1 - REALIN-TRANSITAD */}
-            <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition">
-              <div className="relative w-24 h-24 mx-auto mb-4">
+            {/* Partner 1 - Elephant Logo (RITA Services) */}
+            <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition group">
+              <div className="w-28 h-28 mx-auto mb-4 bg-slate-800 rounded-full flex items-center justify-center border-2 border-amber-500/30 group-hover:border-amber-500 transition overflow-hidden">
                 <img 
-                  src="/images/partners/realin-transitad.png"
-                  alt="REALIN-TRANSITAD"
-                  className="w-full h-full object-contain"
+                  src="/images/partners/rita_logo_elephant_hq.png" 
+                  alt="RITA Services"
+                  className="w-20 h-20 object-contain"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<div class="w-24 h-24 mx-auto bg-white/10 rounded-full flex items-center justify-center"><span class="text-2xl font-bold text-amber-500">RTA</span></div>';
+                    e.target.parentElement.innerHTML = '<span class="text-2xl font-bold text-amber-500">RITA</span>';
                   }}
                 />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">REALIN-TRANSITAD</h3>
-              <p className="text-slate-400 text-sm">Trusted Logistics & Transit Partner</p>
+              <h3 className="text-xl font-semibold text-white mb-2">RITA Services</h3>
+              <p className="text-slate-400 text-sm">Strategic Business Partner</p>
             </div>
 
-            {/* Partner 2 - CBTC */}
-            <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition">
-              <div className="relative w-24 h-24 mx-auto mb-4">
+            {/* Partner 2 - CBTC Logo */}
+            <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition group">
+              <div className="w-28 h-28 mx-auto mb-4 bg-slate-800 rounded-full flex items-center justify-center border-2 border-amber-500/30 group-hover:border-amber-500 transition overflow-hidden">
                 <img 
-                  src="/images/partners/cbtc-logo.png"
+                  src="/images/partners/CBTC logo.png" 
                   alt="CBTC"
-                  className="w-full h-full object-contain"
+                  className="w-20 h-20 object-contain"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<div class="w-24 h-24 mx-auto bg-white/10 rounded-full flex items-center justify-center"><span class="text-2xl font-bold text-amber-500">CBTG</span></div>';
+                    e.target.parentElement.innerHTML = '<span class="text-2xl font-bold text-amber-500">CBTC</span>';
                   }}
                 />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">CBTC</h3>
-              <p className="text-slate-400 text-sm">DU BANG AU TRAVEL | Travel & Tourism Partner</p>
+              <p className="text-slate-400 text-sm">Cobel Business Training Center | Training & Development Partner</p>
             </div>
           </div>
         </div>
         
         <div className="bg-slate-800 rounded-xl p-8">
           <div className="text-center mb-8">
-            <div className="relative w-24 h-24 mx-auto mb-6">
-              <img 
-                src="/massaba-logo.png" 
-                alt="Massaba Consulting" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="w-24 h-24 mx-auto bg-amber-500 rounded-full flex items-center justify-center"><span class="text-4xl font-bold text-slate-900">M</span></div>';
-                }}
-              />
+            <div className="w-24 h-24 mx-auto mb-6 bg-amber-500 rounded-full flex items-center justify-center">
+              <span className="text-4xl font-bold text-slate-900">M</span>
             </div>
             <h1 className="text-4xl font-bold text-white mb-4">About Massaba Consulting</h1>
             <p className="text-xl text-slate-400">Connecting People & Opportunities Since 2010</p>
@@ -147,11 +147,11 @@ export default function AboutPage() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-3">Contact Information</h2>
               <div className="space-y-2 text-slate-300">
-                <p>📧 {COMPANY_INFO.email}</p>
-                <p>📞 {COMPANY_INFO.phone}</p>
-                <p>💬 WhatsApp: {COMPANY_INFO.whatsapp}</p>
-                <p>📍 {COMPANY_INFO.address}</p>
-                <p>⏰ {COMPANY_INFO.businessHours}</p>
+                <p> {COMPANY_INFO.email}</p>
+                <p> {COMPANY_INFO.phone}</p>
+                <p> WhatsApp: {COMPANY_INFO.whatsapp}</p>
+                <p> {COMPANY_INFO.address}</p>
+                <p> {COMPANY_INFO.businessHours}</p>
               </div>
             </div>
             
@@ -160,12 +160,12 @@ export default function AboutPage() {
               <div className="flex gap-4">
                 {SOCIAL_LINKS.instagram && (
                   <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                    📷 Instagram
+                     Instagram
                   </a>
                 )}
                 {SOCIAL_LINKS.facebook && (
                   <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                    📘 Facebook
+                     Facebook
                   </a>
                 )}
               </div>
