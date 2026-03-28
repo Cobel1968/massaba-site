@@ -15,15 +15,15 @@ export default function AboutPage() {
         {/* Founder Hero Section */}
         <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-2xl p-8 mb-12 border border-amber-500/20">
           <div className="flex flex-col md:flex-row gap-8 items-center">
-            {/* Founder Image - Using elephant logo as placeholder */}
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center flex-shrink-0 border-2 border-amber-500/50">
+            {/* Founder Photo */}
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex-shrink-0 border-4 border-amber-500/50 shadow-xl">
               <img 
-                src="/images/partners/rita_logo_elephant_hq.png" 
-                alt="Massaba Consulting"
-                className="w-24 h-24 object-contain"
+                src="/founder-coulibaly-brahima.jpg" 
+                alt="Mr. Coulibaly Brahima - Founder of Massaba Consulting"
+                className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<span class="text-5xl font-bold text-amber-500">M</span>';
+                  e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center"><span class="text-5xl font-bold text-amber-500">CB</span></div>';
                 }}
               />
             </div>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             <p className="text-slate-400">Proud to collaborate with industry leaders</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Partner 1 - Elephant Logo (RITA Services) */}
+            {/* Partner 1 - RITA Services (Elephant Logo) */}
             <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition group">
               <div className="w-28 h-28 mx-auto mb-4 bg-slate-800 rounded-full flex items-center justify-center border-2 border-amber-500/30 group-hover:border-amber-500 transition overflow-hidden">
                 <img 
@@ -86,7 +86,7 @@ export default function AboutPage() {
               <p className="text-slate-400 text-sm">Strategic Business Partner</p>
             </div>
 
-            {/* Partner 2 - CBTC Logo */}
+            {/* Partner 2 - CBTC */}
             <div className="bg-slate-700/50 rounded-xl p-6 text-center hover:bg-slate-700 transition group">
               <div className="w-28 h-28 mx-auto mb-4 bg-slate-800 rounded-full flex items-center justify-center border-2 border-amber-500/30 group-hover:border-amber-500 transition overflow-hidden">
                 <img 
@@ -108,7 +108,15 @@ export default function AboutPage() {
         <div className="bg-slate-800 rounded-xl p-8">
           <div className="text-center mb-8">
             <div className="w-24 h-24 mx-auto mb-6 bg-amber-500 rounded-full flex items-center justify-center">
-              <span className="text-4xl font-bold text-slate-900">M</span>
+              <img 
+                src="/massaba-logo.png" 
+                alt="Massaba Consulting" 
+                className="w-16 h-16 object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<span class="text-4xl font-bold text-slate-900">M</span>';
+                }}
+              />
             </div>
             <h1 className="text-4xl font-bold text-white mb-4">About Massaba Consulting</h1>
             <p className="text-xl text-slate-400">Connecting People & Opportunities Since 2010</p>
@@ -147,11 +155,11 @@ export default function AboutPage() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-3">Contact Information</h2>
               <div className="space-y-2 text-slate-300">
-                <p> {COMPANY_INFO.email}</p>
-                <p> {COMPANY_INFO.phone}</p>
-                <p> WhatsApp: {COMPANY_INFO.whatsapp}</p>
-                <p> {COMPANY_INFO.address}</p>
-                <p> {COMPANY_INFO.businessHours}</p>
+                <p>📧 {COMPANY_INFO.email}</p>
+                <p>📞 {COMPANY_INFO.phone}</p>
+                <p>💬 WhatsApp: {COMPANY_INFO.whatsapp}</p>
+                <p>📍 {COMPANY_INFO.address}</p>
+                <p>⏰ {COMPANY_INFO.businessHours}</p>
               </div>
             </div>
             
@@ -160,12 +168,12 @@ export default function AboutPage() {
               <div className="flex gap-4">
                 {SOCIAL_LINKS.instagram && (
                   <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                     Instagram
+                    📷 Instagram
                   </a>
                 )}
                 {SOCIAL_LINKS.facebook && (
                   <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                     Facebook
+                    📘 Facebook
                   </a>
                 )}
               </div>
