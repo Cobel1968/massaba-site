@@ -1,13 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { User, LogIn, UserPlus, LogOut, Settings } from 'lucide-react'
+import { User, LogIn, UserPlus, LogOut, Settings, Shield } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 export default function Navbar() {
   const [user, setUser] = useState(null)
   const [userProfile, setUserProfile] = useState(null)
   const [userRole, setUserRole] = useState(null)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
 
   useEffect(() => {
     getUser()
@@ -18,11 +19,14 @@ export default function Navbar() {
     setUser(session?.user ?? null)
     
     if (session?.user) {
-      // Check user metadata for role first
+      // Get role from user metadata (this is the ONLY source for roles)
       const metadataRole = session.user.user_metadata?.role
-      setUserRole(metadataRole)
+      const isSuper = session.user.user_metadata?.is_super_admin === true || metadataRole === 'super_admin'
       
-      // Fetch user profile from clients table
+      setUserRole(metadataRole)
+      setIsSuperAdmin(isSuper)
+      
+      // Fetch user profile from clients table (only for display name and client type)
       const { data: profile } = await supabase
         .from('clients')
         .select('full_name, client_type')
@@ -37,8 +41,9 @@ export default function Navbar() {
     window.location.href = '/'
   }
 
-  // Determine if user is admin (check both client_type and user_metadata role)
-  const isAdmin = userProfile?.client_type === 'admin' || userRole === 'admin'
+  // Determine admin access - ONLY from auth metadata (NOT from clients table)
+  const isAdmin = userRole === 'admin' || userRole === 'super_admin' || isSuperAdmin
+  const displayRole = isSuperAdmin ? 'Super Admin' : (isAdmin ? 'Administrator' : (userProfile?.client_type === 'staff' ? 'Staff' : 'Client'))
 
   return (
     <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-50">
@@ -76,10 +81,11 @@ export default function Navbar() {
             {user ? (
               <>
                 <div className="text-right hidden md:block">
-                  <p className="text-white text-sm font-medium">{userProfile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0]}</p>
-                  <p className="text-slate-500 text-xs">
-                    {isAdmin ? 'Administrator' : (userProfile?.client_type === 'staff' ? 'Staff' : 'Client')}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-white text-sm font-medium">{userProfile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0]}</p>
+                    {isSuperAdmin && <Shield className="w-3 h-3 text-amber-500" />}
+                  </div>
+                  <p className="text-slate-500 text-xs">{displayRole}</p>
                 </div>
                 <Link 
                   href={isAdmin ? "/admin" : "/portal"} 
