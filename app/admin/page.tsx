@@ -33,12 +33,8 @@ export default function AdminDashboard() {
     
     setUser(session.user)
     
-    // Check role from user metadata
     const userRole = session.user.user_metadata?.role
     const isSuperAdminUser = session.user.user_metadata?.is_super_admin === true || userRole === 'super_admin'
-    
-    console.log('User role:', userRole)
-    console.log('Is Super Admin:', isSuperAdminUser)
     
     if (!isSuperAdminUser && userRole !== 'admin') {
       window.location.href = '/portal'
@@ -77,7 +73,7 @@ export default function AdminDashboard() {
     if (authError) {
       setMessage('Error: ' + authError.message)
     } else {
-      setMessage(`✓ User created! Temporary password: ${tempPassword}`)
+      setMessage(`User created! Temporary password: ${tempPassword}`)
       setShowAddModal(false)
       setFormData({ full_name: '', email: '', phone: '', client_type: 'Individual', password: '' })
       await loadClients()
@@ -93,7 +89,6 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-slate-950 p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
@@ -104,7 +99,7 @@ export default function AdminDashboard() {
           </div>
           <div className="flex gap-3">
             {isSuperAdmin && (
-              <Link href="/admin/roles" className="flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-lg hover:bg-purple-500/30 transition">
+              <Link href="/admin/roles" className="flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-lg">
                 <Shield size={18} /> Role Management
               </Link>
             )}
@@ -114,35 +109,29 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Message */}
         {message && (
-          <div className={`p-4 rounded-lg mb-6 ${message.includes('✓') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+          <div className={`p-4 rounded-lg mb-6 ${message.includes('User created') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
             {message}
           </div>
         )}
 
-        {/* Create User Button */}
         <div className="mb-6">
-          <button
-            onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold"
-          >
+          <button onClick={() => setShowAddModal(true)} className="flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold">
             <UserPlus size={18} /> Create New User
           </button>
         </div>
 
-        {/* Create User Modal */}
         {showAddModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="bg-slate-800 rounded-xl p-6 w-full max-w-md">
               <h2 className="text-xl font-bold text-white mb-4">Create New User</h2>
               <form onSubmit={handleCreateUser} className="space-y-4">
                 <div>
-                  <label className="block text-slate-300 mb-1">Full Name *</label>
+                  <label className="block text-slate-300 mb-1">Full Name</label>
                   <input type="text" value={formData.full_name} onChange={(e) => setFormData({...formData, full_name: e.target.value})} required className="w-full p-2 bg-slate-700 rounded-lg text-white" />
                 </div>
                 <div>
-                  <label className="block text-slate-300 mb-1">Email *</label>
+                  <label className="block text-slate-300 mb-1">Email</label>
                   <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} required className="w-full p-2 bg-slate-700 rounded-lg text-white" />
                 </div>
                 <div>
@@ -171,7 +160,6 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Clients Table */}
         <div className="bg-slate-800 rounded-xl p-6">
           <h2 className="text-xl font-bold text-white mb-4">All Users ({clients.length})</h2>
           <div className="overflow-x-auto">
@@ -182,19 +170,16 @@ export default function AdminDashboard() {
                   <th className="text-left py-3 text-slate-400">Email</th>
                   <th className="text-left py-3 text-slate-400">Phone</th>
                   <th className="text-left py-3 text-slate-400">Type</th>
-                 </tr>
+                </tr>
               </thead>
               <tbody>
-                {clients.map(client => (
+                {clients.map((client) => (
                   <tr key={client.id} className="border-b border-slate-700">
                     <td className="py-3 text-white">{client.full_name || '-'} </td>
                     <td className="py-3 text-slate-300">{client.email} </td>
                     <td className="py-3 text-slate-300">{client.phone || '-'} </td>
-                    <td className="py-3">
-                      <span className="px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400">
-                        {client.client_type || 'Individual'}
-                      </span>
-                     </tr>
+                    <td className="py-3"><span className="px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400">{client.client_type || 'Individual'}</span></td>
+                  </tr>
                 ))}
               </tbody>
             </table>
