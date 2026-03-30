@@ -23,7 +23,8 @@ export default function ForgotPasswordPage() {
     if (error) {
       setError(error.message)
     } else {
-      setMessage('Password reset email sent! Check your inbox.')
+      setMessage('Password reset email sent! Please check your inbox.')
+      setEmail('')
     }
     setLoading(false)
   }

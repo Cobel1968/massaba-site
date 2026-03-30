@@ -20,7 +20,7 @@ export default function UpdatePasswordPage() {
         router.push('/login')
       }
     })
-  }, [])
+  }, [router])
 
   const handleUpdate = async (e) => {
     e.preventDefault()
