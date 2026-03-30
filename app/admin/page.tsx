@@ -70,7 +70,7 @@ export default function AdminPage() {
     if (error) {
       setMessage('Error: ' + error.message)
     } else {
-      setMessage(`✓ Client added! Temporary password: ${tempPassword}`)
+      setMessage(` Client added! Temporary password: ${tempPassword}`)
       setShowAddForm(false)
       setNewClient({ full_name: '', email: '', phone: '', client_type: 'Individual' })
       fetchClients()
@@ -97,7 +97,7 @@ export default function AdminPage() {
         </div>
 
         {message && (
-          <div className={`p-4 rounded-lg mb-6 ${message.includes('✓') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+          <div className={`p-4 rounded-lg mb-6 ${message.includes('') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
             {message}
           </div>
         )}
