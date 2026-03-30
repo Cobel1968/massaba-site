@@ -1,15 +1,23 @@
 ﻿'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Users, Plus, Trash2, Edit, UserPlus, DollarSign, FileText, CreditCard, LogOut, Shield } from 'lucide-react'
+import { Users, Plus, Trash2, Edit, DollarSign, FileText, CreditCard, LogOut, Shield, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AdminDashboard() {
   const [user, setUser] = useState(null)
   const [clients, setClients] = useState([])
   const [loading, setLoading] = useState(true)
-  const [message, setMessage] = useState('')
   const [isSuperAdmin, setIsSuperAdmin] = useState(false)
+  const [message, setMessage] = useState('')
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [formData, setFormData] = useState({
+    full_name: '',
+    email: '',
+    phone: '',
+    client_type: 'Individual',
+    password: ''
+  })
 
   useEffect(() => {
     checkAdmin()
@@ -17,6 +25,7 @@ export default function AdminDashboard() {
 
   async function checkAdmin() {
     const { data: { session } } = await supabase.auth.getSession()
+    
     if (!session) {
       window.location.href = '/login'
       return
@@ -24,52 +33,57 @@ export default function AdminDashboard() {
     
     setUser(session.user)
     
+    // Check role from user metadata
     const userRole = session.user.user_metadata?.role
     const isSuperAdminUser = session.user.user_metadata?.is_super_admin === true || userRole === 'super_admin'
     
-    setIsSuperAdmin(isSuperAdminUser)
+    console.log('User role:', userRole)
+    console.log('Is Super Admin:', isSuperAdminUser)
     
     if (!isSuperAdminUser && userRole !== 'admin') {
       window.location.href = '/portal'
       return
     }
     
+    setIsSuperAdmin(isSuperAdminUser)
     await loadClients()
   }
 
   async function loadClients() {
     setLoading(true)
-    
-    // Fetch all clients with complete data
-    const { data, error } = await supabase
-      .from('clients')
-      .select('*')
-      .order('created_at', { ascending: false })
-    
-    if (error) {
-      console.error('Error loading clients:', error)
-      setMessage('Error loading clients: ' + error.message)
-    } else {
-      setClients(data || [])
-    }
+    const { data } = await supabase.from('clients').select('*').order('created_at', { ascending: false })
+    if (data) setClients(data)
     setLoading(false)
   }
 
-  async function syncUserData() {
+  async function handleCreateUser(e) {
+    e.preventDefault()
     setLoading(true)
-    setMessage('Syncing user data...')
     
-    // Sync auth.users to clients table
-    const { error } = await supabase.rpc('sync_auth_users_to_clients')
+    const tempPassword = formData.password || Math.random().toString(36).slice(-8) + '!Aa'
     
-    if (error) {
-      setMessage('Sync error: ' + error.message)
+    const { data: authUser, error: authError } = await supabase.auth.admin.createUser({
+      email: formData.email,
+      password: tempPassword,
+      email_confirm: true,
+      user_metadata: { 
+        full_name: formData.full_name,
+        phone: formData.phone,
+        client_type: formData.client_type,
+        role: 'user'
+      }
+    })
+    
+    if (authError) {
+      setMessage('Error: ' + authError.message)
     } else {
-      setMessage('✓ Sync completed successfully')
+      setMessage(`✓ User created! Temporary password: ${tempPassword}`)
+      setShowAddModal(false)
+      setFormData({ full_name: '', email: '', phone: '', client_type: 'Individual', password: '' })
       await loadClients()
     }
     setLoading(false)
-    setTimeout(() => setMessage(''), 3000)
+    setTimeout(() => setMessage(''), 5000)
   }
 
   if (loading && clients.length === 0) {
@@ -94,9 +108,6 @@ export default function AdminDashboard() {
                 <Shield size={18} /> Role Management
               </Link>
             )}
-            <button onClick={syncUserData} className="flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-lg hover:bg-blue-500/30 transition">
-              <Users size={18} /> Sync Users
-            </button>
             <button onClick={() => supabase.auth.signOut()} className="flex items-center gap-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg">
               <LogOut size={18} /> Logout
             </button>
@@ -110,12 +121,59 @@ export default function AdminDashboard() {
           </div>
         )}
 
+        {/* Create User Button */}
+        <div className="mb-6">
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold"
+          >
+            <UserPlus size={18} /> Create New User
+          </button>
+        </div>
+
+        {/* Create User Modal */}
+        {showAddModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-slate-800 rounded-xl p-6 w-full max-w-md">
+              <h2 className="text-xl font-bold text-white mb-4">Create New User</h2>
+              <form onSubmit={handleCreateUser} className="space-y-4">
+                <div>
+                  <label className="block text-slate-300 mb-1">Full Name *</label>
+                  <input type="text" value={formData.full_name} onChange={(e) => setFormData({...formData, full_name: e.target.value})} required className="w-full p-2 bg-slate-700 rounded-lg text-white" />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Email *</label>
+                  <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} required className="w-full p-2 bg-slate-700 rounded-lg text-white" />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Phone</label>
+                  <input type="text" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white" />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Password (leave empty for auto-generated)</label>
+                  <input type="text" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white" />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Client Type</label>
+                  <select value={formData.client_type} onChange={(e) => setFormData({...formData, client_type: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white">
+                    <option value="Individual">Individual</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="premium">Premium</option>
+                    <option value="vip">VIP</option>
+                  </select>
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button type="submit" className="flex-1 bg-amber-500 text-slate-900 py-2 rounded-lg font-bold">Create User</button>
+                  <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 bg-slate-700 text-white py-2 rounded-lg">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* Clients Table */}
         <div className="bg-slate-800 rounded-xl p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-white">All Clients ({clients.length})</h2>
-          </div>
-          
+          <h2 className="text-xl font-bold text-white mb-4">All Users ({clients.length})</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -123,31 +181,20 @@ export default function AdminDashboard() {
                   <th className="text-left py-3 text-slate-400">Name</th>
                   <th className="text-left py-3 text-slate-400">Email</th>
                   <th className="text-left py-3 text-slate-400">Phone</th>
-                  <th className="text-left py-3 text-slate-400">Client Type</th>
-                  <th className="text-left py-3 text-slate-400">Client ID</th>
-                  <th className="text-left py-3 text-slate-400">Joined</th>
+                  <th className="text-left py-3 text-slate-400">Type</th>
                  </tr>
               </thead>
               <tbody>
                 {clients.map(client => (
                   <tr key={client.id} className="border-b border-slate-700">
-                    <td className="py-3 text-white font-medium">{client.full_name || '-'} </td>
+                    <td className="py-3 text-white">{client.full_name || '-'} </td>
                     <td className="py-3 text-slate-300">{client.email} </td>
                     <td className="py-3 text-slate-300">{client.phone || '-'} </td>
                     <td className="py-3">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        client.client_type === 'admin' ? 'bg-amber-500/20 text-amber-400' : 
-                        client.client_type === 'premium' ? 'bg-purple-500/20 text-purple-400' : 
-                        client.client_type === 'vip' ? 'bg-amber-500/20 text-amber-400' :
-                        client.client_type === 'Corporate' ? 'bg-blue-500/20 text-blue-400' :
-                        'bg-green-500/20 text-green-400'
-                      }`}>
+                      <span className="px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400">
                         {client.client_type || 'Individual'}
                       </span>
-                     </td>
-                    <td className="py-3 text-slate-300">{client.client_number || '-'} </td>
-                    <td className="py-3 text-slate-300">{client.created_at ? new Date(client.created_at).toLocaleDateString() : '-'} </td>
-                   </tr>
+                     </tr>
                 ))}
               </tbody>
             </table>
