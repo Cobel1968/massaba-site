@@ -1,26 +1,35 @@
 ﻿'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { User, LogIn, UserPlus, LogOut } from 'lucide-react'
+import { User, LogIn, UserPlus, LogOut, Settings } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 export default function Navbar() {
   const [user, setUser] = useState(null)
+  const [userProfile, setUserProfile] = useState(null)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-
-    return () => subscription.unsubscribe()
+    getUser()
   }, [])
+
+  async function getUser() {
+    const { data: { session } } = await supabase.auth.getSession()
+    setUser(session?.user ?? null)
+    
+    if (session?.user) {
+      // Fetch user profile from clients table
+      const { data: profile } = await supabase
+        .from('clients')
+        .select('full_name, client_type')
+        .eq('id', session.user.id)
+        .single()
+      setUserProfile(profile)
+    }
+  }
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
+    window.location.href = '/'
   }
 
   return (
@@ -44,17 +53,26 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <Link href="/" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">Home</Link>
             <Link href="/services" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">Services</Link>
-            <Link href="/process" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">Process</Link>
             <Link href="/about" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">About</Link>
             <Link href="/contact" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">Contact</Link>
+            {user && userProfile?.client_type === 'admin' && (
+              <Link href="/admin" className="text-amber-500 hover:text-amber-400 transition text-sm font-medium">Admin</Link>
+            )}
+            {user && (
+              <Link href="/pos" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">POS</Link>
+            )}
           </div>
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-3">
             {user ? (
               <>
+                <div className="text-right hidden md:block">
+                  <p className="text-white text-sm font-medium">{userProfile?.full_name || user.email?.split('@')[0]}</p>
+                  <p className="text-slate-500 text-xs">{userProfile?.client_type === 'admin' ? 'Administrator' : 'Client'}</p>
+                </div>
                 <Link 
-                  href="/portal" 
+                  href={userProfile?.client_type === 'admin' ? "/admin" : "/portal"} 
                   className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-full text-sm font-bold transition"
                 >
                   <User size={16} />
