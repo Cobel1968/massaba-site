@@ -1,12 +1,88 @@
-﻿import type { Metadata } from 'next'
+// app/layout.tsx
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Navbar from '@/components/navbar'
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 import Link from 'next/link'
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+}
+
 export const metadata: Metadata = {
-  title: 'Massaba Consulting | Connecting People & Opportunities',
-  description: 'Expert services in B2B consultancy, university placement, government liaison, visa assistance, Omra travel, and vehicle import/export.',
+  metadataBase: new URL('https://massaba.app'),
+  title: {
+    default: 'Massaba Consulting | Connecting People & Opportunities',
+    template: '%s | Massaba Consulting'
+  },
+  description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE.',
+  keywords: [
+    'Massaba Consulting',
+    'B2B consultancy',
+    'education consultancy',
+    'government liaison',
+    'visa services',
+    'Omra travel',
+    'vehicle import export',
+    'UAE business consultancy',
+    'Dubai business setup',
+    'strategic advisory'
+  ],
+  authors: [{ name: 'Massaba Consulting', url: 'https://massaba.app' }],
+  creator: 'Massaba Consulting',
+  publisher: 'Massaba Consulting',
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    title: 'Massaba Consulting | Connecting People & Opportunities',
+    description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export.',
+    url: 'https://massaba.app',
+    siteName: 'Massaba Consulting',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Massaba Consulting - Connecting People & Opportunities',
+      },
+    ],
+    locale: 'en_AE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Massaba Consulting | Connecting People & Opportunities',
+    description: 'Expert consultancy services in UAE and globally.',
+    images: ['/og-image.jpg'],
+    creator: '@massaba',
+    site: '@massaba',
+  },
+  alternates: {
+    canonical: 'https://massaba.app',
+  },
+  category: 'business',
+  classification: 'Consultancy Services',
+  verification: {
+    google: 'your-google-site-verification-code', // Add your Google Search Console code here
+  },
 }
 
 export default function RootLayout({
@@ -72,12 +148,12 @@ export default function RootLayout({
                 <div className="flex gap-3 mt-4">
                   {SOCIAL_LINKS.instagram && (
                     <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                       Instagram
+                      📷 Instagram
                     </a>
                   )}
                   {SOCIAL_LINKS.facebook && (
                     <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                       Facebook
+                      📘 Facebook
                     </a>
                   )}
                 </div>
