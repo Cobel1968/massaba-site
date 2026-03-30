@@ -1,7 +1,7 @@
 ﻿'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Users, Plus, Trash2, Edit, DollarSign, FileText, CreditCard, LogOut, Shield, UserPlus } from 'lucide-react'
+import { Users, LogOut, Shield, UserPlus, RefreshCw } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AdminDashboard() {
@@ -15,8 +15,7 @@ export default function AdminDashboard() {
     full_name: '',
     email: '',
     phone: '',
-    client_type: 'Individual',
-    password: ''
+    client_type: 'Individual'
   })
 
   useEffect(() => {
@@ -33,32 +32,33 @@ export default function AdminDashboard() {
     
     setUser(session.user)
     
+    // Check for super admin in user metadata
     const userRole = session.user.user_metadata?.role
-    const isSuperAdminUser = session.user.user_metadata?.is_super_admin === true || userRole === 'super_admin'
+    const isSuper = session.user.user_metadata?.is_super_admin === true || userRole === 'super_admin'
     
-    if (!isSuperAdminUser && userRole !== 'admin') {
-      window.location.href = '/portal'
-      return
-    }
+    console.log('User email:', session.user.email)
+    console.log('User role:', userRole)
+    console.log('Is super admin:', isSuper)
     
-    setIsSuperAdmin(isSuperAdminUser)
+    setIsSuperAdmin(isSuper)
+    
     await loadClients()
+    setLoading(false)
   }
 
   async function loadClients() {
-    setLoading(true)
     const { data } = await supabase.from('clients').select('*').order('created_at', { ascending: false })
     if (data) setClients(data)
-    setLoading(false)
   }
 
   async function handleCreateUser(e) {
     e.preventDefault()
     setLoading(true)
     
-    const tempPassword = formData.password || Math.random().toString(36).slice(-8) + '!Aa'
+    const tempPassword = Math.random().toString(36).slice(-8) + '!Aa'
     
-    const { data: authUser, error: authError } = await supabase.auth.admin.createUser({
+    // This requires service role key - will show error if not configured
+    const { data, error } = await supabase.auth.admin.createUser({
       email: formData.email,
       password: tempPassword,
       email_confirm: true,
@@ -70,19 +70,19 @@ export default function AdminDashboard() {
       }
     })
     
-    if (authError) {
-      setMessage('Error: ' + authError.message)
+    if (error) {
+      setMessage('Error: ' + error.message + ' (Use Supabase Dashboard to create users)')
     } else {
       setMessage(`User created! Temporary password: ${tempPassword}`)
       setShowAddModal(false)
-      setFormData({ full_name: '', email: '', phone: '', client_type: 'Individual', password: '' })
+      setFormData({ full_name: '', email: '', phone: '', client_type: 'Individual' })
       await loadClients()
     }
     setLoading(false)
     setTimeout(() => setMessage(''), 5000)
   }
 
-  if (loading && clients.length === 0) {
+  if (loading) {
     return <div className="min-h-screen bg-slate-950 text-white p-8">Loading...</div>
   }
 
@@ -93,16 +93,14 @@ export default function AdminDashboard() {
           <div>
             <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
             <p className="text-slate-400">
-              Welcome back, {user?.user_metadata?.full_name || user?.email}
+              Welcome, {user?.user_metadata?.full_name || user?.email}
               {isSuperAdmin && <span className="ml-2 px-2 py-0.5 bg-amber-500/20 text-amber-400 rounded-full text-xs">Super Admin</span>}
             </p>
           </div>
           <div className="flex gap-3">
-            {isSuperAdmin && (
-              <Link href="/admin/roles" className="flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-lg">
-                <Shield size={18} /> Role Management
-              </Link>
-            )}
+            <button onClick={() => window.location.reload()} className="flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-lg">
+              <RefreshCw size={18} /> Refresh
+            </button>
             <button onClick={() => supabase.auth.signOut()} className="flex items-center gap-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg">
               <LogOut size={18} /> Logout
             </button>
@@ -110,17 +108,36 @@ export default function AdminDashboard() {
         </div>
 
         {message && (
-          <div className={`p-4 rounded-lg mb-6 ${message.includes('User created') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+          <div className={`p-4 rounded-lg mb-6 ${message.includes('created') ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
             {message}
           </div>
         )}
 
-        <div className="mb-6">
-          <button onClick={() => setShowAddModal(true)} className="flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold">
-            <UserPlus size={18} /> Create New User
-          </button>
-        </div>
+        {/* Super Admin Tools */}
+        {isSuperAdmin && (
+          <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-6 mb-8">
+            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <Shield size={20} /> Super Admin Tools
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-2 rounded-lg font-bold"
+              >
+                <UserPlus size={18} /> Create New User
+              </button>
+              <Link
+                href="https://app.supabase.com/project/wdvidnhqzomdsiirizla/auth/users"
+                target="_blank"
+                className="flex items-center gap-2 bg-slate-700 text-white px-4 py-2 rounded-lg"
+              >
+                Manage Roles in Supabase
+              </Link>
+            </div>
+          </div>
+        )}
 
+        {/* Create User Modal */}
         {showAddModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="bg-slate-800 rounded-xl p-6 w-full max-w-md">
@@ -139,10 +156,6 @@ export default function AdminDashboard() {
                   <input type="text" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white" />
                 </div>
                 <div>
-                  <label className="block text-slate-300 mb-1">Password (leave empty for auto-generated)</label>
-                  <input type="text" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white" />
-                </div>
-                <div>
                   <label className="block text-slate-300 mb-1">Client Type</label>
                   <select value={formData.client_type} onChange={(e) => setFormData({...formData, client_type: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white">
                     <option value="Individual">Individual</option>
@@ -156,10 +169,14 @@ export default function AdminDashboard() {
                   <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 bg-slate-700 text-white py-2 rounded-lg">Cancel</button>
                 </div>
               </form>
+              <p className="text-slate-500 text-xs mt-4 text-center">
+                Note: User creation requires Service Role Key. If it fails, use Supabase Dashboard.
+              </p>
             </div>
           </div>
         )}
 
+        {/* Clients Table */}
         <div className="bg-slate-800 rounded-xl p-6">
           <h2 className="text-xl font-bold text-white mb-4">All Users ({clients.length})</h2>
           <div className="overflow-x-auto">
