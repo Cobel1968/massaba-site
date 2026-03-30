@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { User, LogIn, UserPlus, LogOut, Settings } from 'lucide-react'
@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabase'
 export default function Navbar() {
   const [user, setUser] = useState(null)
   const [userProfile, setUserProfile] = useState(null)
+  const [userRole, setUserRole] = useState(null)
 
   useEffect(() => {
     getUser()
@@ -17,6 +18,10 @@ export default function Navbar() {
     setUser(session?.user ?? null)
     
     if (session?.user) {
+      // Check user metadata for role first
+      const metadataRole = session.user.user_metadata?.role
+      setUserRole(metadataRole)
+      
       // Fetch user profile from clients table
       const { data: profile } = await supabase
         .from('clients')
@@ -31,6 +36,9 @@ export default function Navbar() {
     await supabase.auth.signOut()
     window.location.href = '/'
   }
+
+  // Determine if user is admin (check both client_type and user_metadata role)
+  const isAdmin = userProfile?.client_type === 'admin' || userRole === 'admin'
 
   return (
     <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-50">
@@ -55,7 +63,7 @@ export default function Navbar() {
             <Link href="/services" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">Services</Link>
             <Link href="/about" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">About</Link>
             <Link href="/contact" className="text-slate-300 hover:text-amber-500 transition text-sm font-medium">Contact</Link>
-            {user && userProfile?.client_type === 'admin' && (
+            {user && isAdmin && (
               <Link href="/admin" className="text-amber-500 hover:text-amber-400 transition text-sm font-medium">Admin</Link>
             )}
             {user && (
@@ -68,11 +76,13 @@ export default function Navbar() {
             {user ? (
               <>
                 <div className="text-right hidden md:block">
-                  <p className="text-white text-sm font-medium">{userProfile?.full_name || user.email?.split('@')[0]}</p>
-                  <p className="text-slate-500 text-xs">{userProfile?.client_type === 'admin' ? 'Administrator' : 'Client'}</p>
+                  <p className="text-white text-sm font-medium">{userProfile?.full_name || user.user_metadata?.full_name || user.email?.split('@')[0]}</p>
+                  <p className="text-slate-500 text-xs">
+                    {isAdmin ? 'Administrator' : (userProfile?.client_type === 'staff' ? 'Staff' : 'Client')}
+                  </p>
                 </div>
                 <Link 
-                  href={userProfile?.client_type === 'admin' ? "/admin" : "/portal"} 
+                  href={isAdmin ? "/admin" : "/portal"} 
                   className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 px-4 py-2 rounded-full text-sm font-bold transition"
                 >
                   <User size={16} />
