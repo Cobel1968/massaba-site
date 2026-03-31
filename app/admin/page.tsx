@@ -7,6 +7,7 @@ import Link from 'next/link'
 export default function AdminDashboard() {
   const [user, setUser] = useState(null)
   const [clients, setClients] = useState([])
+  const [systemUsers, setSystemUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [isSuperAdmin, setIsSuperAdmin] = useState(false)
   const [message, setMessage] = useState('')
@@ -15,7 +16,8 @@ export default function AdminDashboard() {
     full_name: '',
     email: '',
     phone: '',
-    client_type: 'Individual'
+    client_type: 'Individual',
+    password: ''
   })
 
   useEffect(() => {
@@ -32,17 +34,17 @@ export default function AdminDashboard() {
     
     setUser(session.user)
     
-    // Check for super admin in user metadata
-    const userRole = session.user.user_metadata?.role
-    const isSuper = session.user.user_metadata?.is_super_admin === true || userRole === 'super_admin'
-    
-    console.log('User email:', session.user.email)
-    console.log('User role:', userRole)
-    console.log('Is super admin:', isSuper)
+    const isSuper = session.user.user_metadata?.is_super_admin === true || 
+                   session.user.user_metadata?.role === 'super_admin'
     
     setIsSuperAdmin(isSuper)
     
     await loadClients()
+    
+    if (isSuper) {
+      await loadSystemUsers()
+    }
+    
     setLoading(false)
   }
 
@@ -51,32 +53,67 @@ export default function AdminDashboard() {
     if (data) setClients(data)
   }
 
+  async function loadSystemUsers() {
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      
+      if (!token) return
+      
+      const response = await fetch('/api/admin/users', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setSystemUsers(data.users || [])
+      } else {
+        console.error('Failed to load users:', await response.text())
+      }
+    } catch (error) {
+      console.error('Error loading users:', error)
+    }
+  }
+
   async function handleCreateUser(e) {
     e.preventDefault()
     setLoading(true)
     
-    const tempPassword = Math.random().toString(36).slice(-8) + '!Aa'
+    const tempPassword = formData.password || Math.random().toString(36).slice(-8) + '!Aa'
     
-    // This requires service role key - will show error if not configured
-    const { data, error } = await supabase.auth.admin.createUser({
-      email: formData.email,
-      password: tempPassword,
-      email_confirm: true,
-      user_metadata: { 
-        full_name: formData.full_name,
-        phone: formData.phone,
-        client_type: formData.client_type,
-        role: 'user'
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+      
+      const response = await fetch('/api/admin/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: tempPassword,
+          full_name: formData.full_name,
+          phone: formData.phone,
+          client_type: formData.client_type
+        })
+      })
+      
+      if (response.ok) {
+        setMessage(` User created! Temporary password: ${tempPassword}`)
+        setShowAddModal(false)
+        setFormData({ full_name: '', email: '', phone: '', client_type: 'Individual', password: '' })
+        await loadClients()
+        await loadSystemUsers()
+      } else {
+        const error = await response.json()
+        setMessage('Error: ' + (error.error || 'Unknown error'))
       }
-    })
-    
-    if (error) {
-      setMessage('Error: ' + error.message + ' (Use Supabase Dashboard to create users)')
-    } else {
-      setMessage(`User created! Temporary password: ${tempPassword}`)
-      setShowAddModal(false)
-      setFormData({ full_name: '', email: '', phone: '', client_type: 'Individual' })
-      await loadClients()
+    } catch (error) {
+      setMessage('Error: ' + error.message)
     }
     setLoading(false)
     setTimeout(() => setMessage(''), 5000)
@@ -98,7 +135,7 @@ export default function AdminDashboard() {
             </p>
           </div>
           <div className="flex gap-3">
-            <button onClick={() => window.location.reload()} className="flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-lg">
+            <button onClick={() => { loadClients(); loadSystemUsers(); }} className="flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-lg">
               <RefreshCw size={18} /> Refresh
             </button>
             <button onClick={() => supabase.auth.signOut()} className="flex items-center gap-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg">
@@ -108,7 +145,7 @@ export default function AdminDashboard() {
         </div>
 
         {message && (
-          <div className={`p-4 rounded-lg mb-6 ${message.includes('created') ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+          <div className={`p-4 rounded-lg mb-6 ${message.includes('') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
             {message}
           </div>
         )}
@@ -126,14 +163,41 @@ export default function AdminDashboard() {
               >
                 <UserPlus size={18} /> Create New User
               </button>
-              <Link
-                href="https://app.supabase.com/project/wdvidnhqzomdsiirizla/auth/users"
-                target="_blank"
-                className="flex items-center gap-2 bg-slate-700 text-white px-4 py-2 rounded-lg"
-              >
-                Manage Roles in Supabase
-              </Link>
             </div>
+            
+            {systemUsers.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-white font-semibold mb-3">System Users ({systemUsers.length})</h3>
+                <div className="bg-slate-700/50 rounded-lg overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-slate-600">
+                        <th className="text-left py-2 px-3 text-slate-400">Email</th>
+                        <th className="text-left py-2 px-3 text-slate-400">Role</th>
+                        <th className="text-left py-2 px-3 text-slate-400">Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {systemUsers.map((u) => (
+                        <tr key={u.id} className="border-b border-slate-600">
+                          <td className="py-2 px-3 text-slate-300">{u.email}</td>
+                          <td className="py-2 px-3">
+                            <span className={`px-2 py-0.5 rounded-full text-xs ${
+                              u.user_metadata?.role === 'super_admin' ? 'bg-amber-500/20 text-amber-400' :
+                              u.user_metadata?.role === 'admin' ? 'bg-purple-500/20 text-purple-400' :
+                              'bg-slate-500/20 text-slate-400'
+                            }`}>
+                              {u.user_metadata?.role || 'user'}
+                            </span>
+                          </td>
+                          <td className="py-2 px-3 text-slate-300">{u.user_metadata?.full_name || '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -144,16 +208,20 @@ export default function AdminDashboard() {
               <h2 className="text-xl font-bold text-white mb-4">Create New User</h2>
               <form onSubmit={handleCreateUser} className="space-y-4">
                 <div>
-                  <label className="block text-slate-300 mb-1">Full Name</label>
+                  <label className="block text-slate-300 mb-1">Full Name *</label>
                   <input type="text" value={formData.full_name} onChange={(e) => setFormData({...formData, full_name: e.target.value})} required className="w-full p-2 bg-slate-700 rounded-lg text-white" />
                 </div>
                 <div>
-                  <label className="block text-slate-300 mb-1">Email</label>
+                  <label className="block text-slate-300 mb-1">Email *</label>
                   <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} required className="w-full p-2 bg-slate-700 rounded-lg text-white" />
                 </div>
                 <div>
                   <label className="block text-slate-300 mb-1">Phone</label>
                   <input type="text" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white" />
+                </div>
+                <div>
+                  <label className="block text-slate-300 mb-1">Password (leave empty for auto-generated)</label>
+                  <input type="text" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} className="w-full p-2 bg-slate-700 rounded-lg text-white" />
                 </div>
                 <div>
                   <label className="block text-slate-300 mb-1">Client Type</label>
@@ -169,16 +237,13 @@ export default function AdminDashboard() {
                   <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 bg-slate-700 text-white py-2 rounded-lg">Cancel</button>
                 </div>
               </form>
-              <p className="text-slate-500 text-xs mt-4 text-center">
-                Note: User creation requires Service Role Key. If it fails, use Supabase Dashboard.
-              </p>
             </div>
           </div>
         )}
 
         {/* Clients Table */}
         <div className="bg-slate-800 rounded-xl p-6">
-          <h2 className="text-xl font-bold text-white mb-4">All Users ({clients.length})</h2>
+          <h2 className="text-xl font-bold text-white mb-4">All Clients ({clients.length})</h2>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
