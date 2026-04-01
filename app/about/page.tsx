@@ -23,7 +23,7 @@ export default function AboutPage() {
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center"><span class="text-5xl font-bold text-amber-500">CB</span></div>';
+                  e.target.parentElement.innerHTML = '<div className="w-full h-full flex items-center justify-center"><span className="text-5xl font-bold text-amber-500">CB</span></div>';
                 }}
               />
             </div>
@@ -78,7 +78,7 @@ export default function AboutPage() {
                   className="w-20 h-20 object-contain"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<span class="text-2xl font-bold text-amber-500">RITA</span>';
+                    e.target.parentElement.innerHTML = '<span className="text-2xl font-bold text-amber-500">RITA</span>';
                   }}
                 />
               </div>
@@ -95,7 +95,7 @@ export default function AboutPage() {
                   className="w-20 h-20 object-contain"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<span class="text-2xl font-bold text-amber-500">CBTC</span>';
+                    e.target.parentElement.innerHTML = '<span className="text-2xl font-bold text-amber-500">CBTC</span>';
                   }}
                 />
               </div>
@@ -114,7 +114,7 @@ export default function AboutPage() {
                 className="w-16 h-16 object-contain"
                 onError={(e) => {
                   e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<span class="text-4xl font-bold text-slate-900">M</span>';
+                  e.target.parentElement.innerHTML = '<span className="text-4xl font-bold text-slate-900">M</span>';
                 }}
               />
             </div>
