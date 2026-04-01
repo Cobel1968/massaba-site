@@ -58,11 +58,16 @@ export default function AdminDashboard() {
       const { data: { session } } = await supabase.auth.getSession()
       const token = session?.access_token
       
-      if (!token) return
+      if (!token) {
+        console.error('No token available')
+        return
+      }
       
       const response = await fetch('/api/admin/users', {
+        method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       })
       
@@ -70,7 +75,8 @@ export default function AdminDashboard() {
         const data = await response.json()
         setSystemUsers(data.users || [])
       } else {
-        console.error('Failed to load users:', await response.text())
+        const errorText = await response.text()
+        console.error('API Error:', response.status, errorText)
       }
     } catch (error) {
       console.error('Error loading users:', error)
@@ -87,6 +93,12 @@ export default function AdminDashboard() {
       const { data: { session } } = await supabase.auth.getSession()
       const token = session?.access_token
       
+      if (!token) {
+        setMessage('Error: Not authenticated')
+        setLoading(false)
+        return
+      }
+      
       const response = await fetch('/api/admin/users', {
         method: 'POST',
         headers: {
@@ -102,6 +114,8 @@ export default function AdminDashboard() {
         })
       })
       
+      const result = await response.json()
+      
       if (response.ok) {
         setMessage(` User created! Temporary password: ${tempPassword}`)
         setShowAddModal(false)
@@ -109,8 +123,7 @@ export default function AdminDashboard() {
         await loadClients()
         await loadSystemUsers()
       } else {
-        const error = await response.json()
-        setMessage('Error: ' + (error.error || 'Unknown error'))
+        setMessage('Error: ' + (result.error || 'Unknown error'))
       }
     } catch (error) {
       setMessage('Error: ' + error.message)
@@ -175,7 +188,7 @@ export default function AdminDashboard() {
                         <th className="text-left py-2 px-3 text-slate-400">Email</th>
                         <th className="text-left py-2 px-3 text-slate-400">Role</th>
                         <th className="text-left py-2 px-3 text-slate-400">Name</th>
-                      </tr>
+                       </tr>
                     </thead>
                     <tbody>
                       {systemUsers.map((u) => (
@@ -252,14 +265,14 @@ export default function AdminDashboard() {
                   <th className="text-left py-3 text-slate-400">Email</th>
                   <th className="text-left py-3 text-slate-400">Phone</th>
                   <th className="text-left py-3 text-slate-400">Type</th>
-                </tr>
+                 </tr>
               </thead>
               <tbody>
                 {clients.map((client) => (
                   <tr key={client.id} className="border-b border-slate-700">
-                    <td className="py-3 text-white">{client.full_name || '-'} </td>
-                    <td className="py-3 text-slate-300">{client.email} </td>
-                    <td className="py-3 text-slate-300">{client.phone || '-'} </td>
+                    <td className="py-3 text-white">{client.full_name || '-'}</td>
+                    <td className="py-3 text-slate-300">{client.email}</td>
+                    <td className="py-3 text-slate-300">{client.phone || '-'}</td>
                     <td className="py-3"><span className="px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-400">{client.client_type || 'Individual'}</span></td>
                   </tr>
                 ))}
