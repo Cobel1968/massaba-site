@@ -1,5 +1,4 @@
-// app/layout.tsx
-import type { Metadata, Viewport } from 'next'
+﻿import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Navbar from '@/components/navbar'
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
@@ -8,9 +7,8 @@ import Link from 'next/link'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  viewportFit: 'cover',
+  maximumScale: 5,
+  userScalable: true,
 }
 
 export const metadata: Metadata = {
@@ -19,18 +17,18 @@ export const metadata: Metadata = {
     default: 'Massaba Consulting | Connecting People & Opportunities',
     template: '%s | Massaba Consulting'
   },
-  description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE.',
+  description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE. Trusted by businesses across Africa, Middle East, and global markets.',
   keywords: [
     'Massaba Consulting',
-    'B2B consultancy',
-    'education consultancy',
-    'government liaison',
-    'visa services',
-    'Omra travel',
-    'vehicle import export',
-    'UAE business consultancy',
-    'Dubai business setup',
-    'strategic advisory'
+    'B2B consultancy Dubai',
+    'education consultancy UAE',
+    'government liaison services',
+    'visa services UAE',
+    'Omra travel packages',
+    'vehicle import export Dubai',
+    'business consultancy Africa',
+    'UAE business setup',
+    'strategic advisory services'
   ],
   authors: [{ name: 'Massaba Consulting', url: 'https://massaba.app' }],
   creator: 'Massaba Consulting',
@@ -53,7 +51,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Massaba Consulting | Connecting People & Opportunities',
-    description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export.',
+    description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE.',
     url: 'https://massaba.app',
     siteName: 'Massaba Consulting',
     images: [
@@ -77,11 +75,16 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://massaba.app',
+    languages: {
+      'en': 'https://massaba.app',
+      'fr': 'https://massaba.app/fr',
+      'ar': 'https://massaba.app/ar',
+    },
   },
   category: 'business',
   classification: 'Consultancy Services',
   verification: {
-    google: 'your-google-site-verification-code', // Add your Google Search Console code here
+    google: '', // Add your Google Search Console verification code here
   },
 }
 
@@ -100,7 +103,6 @@ export default function RootLayout({
         <footer className="border-t border-slate-800 bg-slate-900 py-12">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {/* Logo Section */}
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <img src="/massaba-logo.png" alt="Massaba" className="h-10 w-auto" />
@@ -114,7 +116,6 @@ export default function RootLayout({
                 </p>
               </div>
               
-              {/* Quick Links */}
               <div>
                 <h3 className="text-white font-bold mb-4">Quick Links</h3>
                 <ul className="space-y-2">
@@ -125,7 +126,6 @@ export default function RootLayout({
                 </ul>
               </div>
               
-              {/* Contact Info */}
               <div>
                 <h3 className="text-white font-bold mb-4">Contact</h3>
                 <p className="text-slate-400 text-sm">
@@ -135,7 +135,6 @@ export default function RootLayout({
                 </p>
               </div>
               
-              {/* Address & Hours */}
               <div>
                 <h3 className="text-white font-bold mb-4">Address</h3>
                 <p className="text-slate-400 text-sm">
@@ -148,12 +147,12 @@ export default function RootLayout({
                 <div className="flex gap-3 mt-4">
                   {SOCIAL_LINKS.instagram && (
                     <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                      📷 Instagram
+                       Instagram
                     </a>
                   )}
                   {SOCIAL_LINKS.facebook && (
                     <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                      📘 Facebook
+                       Facebook
                     </a>
                   )}
                 </div>
