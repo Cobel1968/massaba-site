@@ -1,17 +1,39 @@
 ﻿'use client'
 
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'
 import ServiceInquiry from '../../../components/ServiceInquiry'
+import UniversityCard from '../../../components/UniversityCard'
 
-export default function Page() {
+export default function EducationPage() {
   const serviceFeatures = [
-    'Market entry strategies',
-    'Partnership development',
-    'Corporate growth planning',
-    'Cross-border business advisory',
-    'Investment opportunities',
-    'Trade facilitation'
+    'University selection guidance',
+    'Application assistance',
+    'Visa guidance',
+    'Pre-departure orientation',
+    'Scholarship guidance',
+    'Accommodation assistance'
+  ]
+
+  const partnerUniversities = [
+    {
+      name: "American University of Ras Al Khaimah (AURAK)",
+      country: "Émirats Arabes Unis",
+      flag: "",
+      logo: "/images/partners/aurak-logo.png",
+      tagline: "Style américain aux Émirats - Accréditations ABET",
+      slug: "aurak",
+      badge: "Partenaire Officiel"
+    },
+    {
+      name: "Renaissance University (RVU)",
+      country: "Arménie",
+      flag: "",
+      logo: "/images/partners/rvu-logo.png",
+      tagline: "Formation moderne en Arménie - Double diplôme possible",
+      slug: "rvu",
+      badge: "Nouveau Partenaire"
+    }
   ]
 
   return (
@@ -21,11 +43,34 @@ export default function Page() {
           <ArrowLeft size={20} /> Back to Services
         </Link>
 
+        {/* Partners Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
+              <Award className="w-4 h-4 text-amber-500" />
+              <span className="text-amber-500 text-sm font-medium">Partenariats Exclusifs</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Nos Universités Partenaires à l'International
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Étudiez avec des institutions reconnues dans le monde entier  partenariats exclusifs Massaba
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {partnerUniversities.map((uni) => (
+              <UniversityCard key={uni.slug} {...uni} />
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - Service Info */}
           <div>
             <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
               <img 
-                src="/images/education/AccueilAssure.jpg" 
+                src="/images/education/AccueilAssure.jpg"
                 alt="Education Consultancy"
                 className="w-full h-full object-cover"
               />
@@ -44,8 +89,23 @@ export default function Page() {
                 ))}
               </ul>
             </div>
+
+            {/* Support Info */}
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                <Globe className="w-5 h-5 text-amber-500" />
+                Accompagnement Complet
+              </h3>
+              <ul className="space-y-2 text-slate-300 text-sm">
+                <li> Accompagnement en français</li>
+                <li> Reconnaissance des diplômes en Côte d'Ivoire</li>
+                <li> Aide aux démarches consulaires (UAE / Arménie)</li>
+                <li> Processus de candidature simplifié via Massaba</li>
+              </ul>
+            </div>
           </div>
 
+          {/* Right Column - Inquiry Form */}
           <ServiceInquiry serviceName="Education Consultancy" />
         </div>
       </div>
