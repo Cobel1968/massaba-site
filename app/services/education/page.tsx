@@ -17,31 +17,51 @@ export default function EducationPage() {
 
   const partnerUniversities = [
     {
+      name: "Royal Victorian University (RVU)",
+      country: "Arménie",
+      flag: "",
+      logo: "",
+      tagline: "Formation moderne et innovante en Arménie",
+      slug: "rvu",
+      badge: "Partenaire Officiel Massaba",
+      highlights: [
+        "Programmes en anglais et russe",
+        "Coûts abordables pour les étudiants africains",
+        "Environnement d'études moderne",
+        "Accompagnement visa et inscription simplifié via Massaba"
+      ]
+    },
+    {
       name: "American University of Ras Al Khaimah (AURAK)",
       country: "Émirats Arabes Unis",
       flag: "",
-      logo: "/images/partners/aurak-logo.png",
-      tagline: "Style américain aux Émirats - Accréditations ABET",
+      logo: "",
+      tagline: "Style américain aux Émirats Arabes Unis",
       slug: "aurak",
-      badge: "Partenaire Officiel"
+      badge: "Partenaire Officiel Massaba",
+      highlights: [
+        "Programmes en anglais avec accréditations internationales (ABET)",
+        "Plus de 45 nationalités sur le campus",
+        "Possibilité de transfert vers les universités américaines",
+        "Stages obligatoires et focus sur l'employabilité",
+        "Bourses et aides financières disponibles"
+      ]
     },
     {
-      name: "Renaissance University (RVU)",
-      country: "Arménie",
-      flag: "",
-      logo: "/images/partners/rvu-logo.png",
-      tagline: "Formation moderne en Arménie - Double diplôme possible",
-      slug: "rvu",
-      badge: "Nouveau Partenaire"
-    },
-    {
-      name: "Cobel Business Training Center (CBTC)",
+      name: "Cobel Business Training Center",
       country: "Côte d'Ivoire",
       flag: "",
-      logo: "/images/partners/cbtc-logo.png",
-      tagline: "Formation professionnelle et développement des compétences",
+      logo: "",
+      tagline: "Formation professionnelle de qualité à Abidjan",
       slug: "cbtc",
-      badge: "Centre de Formation"
+      badge: "Partenaire Local Massaba",
+      highlights: [
+        "Formations certifiantes en Gestion, Marketing, Finance, RH",
+        "Préparation aux examens internationaux (IELTS, etc.)",
+        "Cours flexibles (soir, week-end ou intensifs)",
+        "Formateurs expérimentés et certifications reconnues",
+        "Prix accessibles et paiement échelonné"
+      ]
     }
   ]
 
