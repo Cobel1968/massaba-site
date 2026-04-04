@@ -33,6 +33,15 @@ export default function EducationPage() {
       tagline: "Formation moderne en Arménie - Double diplôme possible",
       slug: "rvu",
       badge: "Nouveau Partenaire"
+    },
+    {
+      name: "Cobel Business Training Center (CBTC)",
+      country: "Côte d'Ivoire",
+      flag: "",
+      logo: "/images/partners/cbtc-logo.png",
+      tagline: "Formation professionnelle et développement des compétences",
+      slug: "cbtc",
+      badge: "Centre de Formation"
     }
   ]
 
@@ -51,14 +60,14 @@ export default function EducationPage() {
               <span className="text-amber-500 text-sm font-medium">Partenariats Exclusifs</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Nos Universités Partenaires à l'International
+              Nos Universités & Centres de Formation Partenaires
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
               Étudiez avec des institutions reconnues dans le monde entier  partenariats exclusifs Massaba
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {partnerUniversities.map((uni) => (
               <UniversityCard key={uni.slug} {...uni} />
             ))}
