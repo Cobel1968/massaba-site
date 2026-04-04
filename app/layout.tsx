@@ -1,6 +1,6 @@
 ﻿import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import Navbar from '@/components/navbar'
+import Navbar from '@/components/navbar'import EnhancedAIAssistant from "@/components/EnhancedAIAssistant"
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 import Link from 'next/link'
 
@@ -166,7 +166,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
-      </body>
+      <EnhancedAIAssistant /></body>
     </html>
   )
 }
