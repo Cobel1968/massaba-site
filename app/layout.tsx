@@ -1,8 +1,9 @@
 ﻿import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import Navbar from '@/components/navbar'import EnhancedAIAssistant from "@/components/EnhancedAIAssistant"
+import Navbar from '@/components/navbar'
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 import Link from 'next/link'
+import EnhancedAIAssistant from '@/components/EnhancedAIAssistant'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     default: 'Massaba Consulting | Connecting People & Opportunities',
     template: '%s | Massaba Consulting'
   },
-  description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE. Trusted by businesses across Africa, Middle East, and global markets.',
+  description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE.',
   keywords: [
     'Massaba Consulting',
     'B2B consultancy Dubai',
@@ -25,10 +26,7 @@ export const metadata: Metadata = {
     'government liaison services',
     'visa services UAE',
     'Omra travel packages',
-    'vehicle import export Dubai',
-    'business consultancy Africa',
-    'UAE business setup',
-    'strategic advisory services'
+    'vehicle import export Dubai'
   ],
   authors: [{ name: 'Massaba Consulting', url: 'https://massaba.app' }],
   creator: 'Massaba Consulting',
@@ -51,7 +49,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Massaba Consulting | Connecting People & Opportunities',
-    description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export in UAE.',
+    description: 'Expert consultancy services in B2B, education, government liaison, visa assistance, Omra travel, and vehicle import/export.',
     url: 'https://massaba.app',
     siteName: 'Massaba Consulting',
     images: [
@@ -75,17 +73,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://massaba.app',
-    languages: {
-      'en': 'https://massaba.app',
-      'fr': 'https://massaba.app/fr',
-      'ar': 'https://massaba.app/ar',
-    },
   },
   category: 'business',
   classification: 'Consultancy Services',
-  verification: {
-    google: '', // Add your Google Search Console verification code here
-  },
 }
 
 export default function RootLayout({
@@ -166,7 +156,8 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
-      <EnhancedAIAssistant /></body>
+        <EnhancedAIAssistant />
+      </body>
     </html>
   )
 }
