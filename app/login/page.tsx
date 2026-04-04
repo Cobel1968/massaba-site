@@ -1,7 +1,7 @@
 ﻿'use client'
 import { useState } from 'react'
 import { supabase } from '../../lib/supabase'
-import { Mail, Lock, LogIn, ArrowLeft } from 'lucide-react'
+import { Mail, Lock, LogIn, ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
   const handleLogin = async (e) => {
@@ -68,13 +69,20 @@ export default function LoginPage() {
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-amber-500"
-                  placeholder="Ã¢â‚¬Â¢Ã¢â‚¬Â¢Ã¢â‚¬Â¢Ã¢â‚¬Â¢Ã¢â‚¬Â¢Ã¢â‚¬Â¢Ã¢â‚¬Â¢Ã¢â‚¬Â¢"
+                  className="w-full pl-10 pr-12 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-amber-500"
+                  placeholder=""
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-amber-500 transition"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
             </div>
             
@@ -85,9 +93,15 @@ export default function LoginPage() {
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
-          <div className="text-center mt-4"><Link href="/forgot-password" className="text-amber-500 hover:text-amber-400 text-sm">Forgot password?</Link></div></form>
+          </form>
           
           <div className="mt-6 text-center">
+            <Link href="/forgot-password" className="text-amber-500 hover:text-amber-400 text-sm">
+              Forgot password?
+            </Link>
+          </div>
+          
+          <div className="mt-4 text-center">
             <p className="text-slate-400 text-sm">
               Don't have an account?{' '}
               <Link href="/signup" className="text-amber-500 hover:text-amber-400">
