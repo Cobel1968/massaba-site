@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'
 import VideoBanner from '@/components/VideoBanner'
 import ServiceInquiry from '../../../components/ServiceInquiry'
-import UniversityCard from '../../../components/UniversityCard'import YoutubeVideoCard from "@/components/YoutubeVideoCard"
+import UniversityCard from '../../../components/UniversityCard'
+import YoutubeVideoCard from '@/components/YoutubeVideoCard'
 
 export default function EducationPage() {
   const serviceFeatures = [
@@ -93,7 +94,9 @@ export default function EducationPage() {
               <UniversityCard key={uni.slug} {...uni} />
             ))}
           </div>
-                {/* UNIRANKS 2026 Ranking Section */}
+        </div>
+
+        {/* UNIRANKS 2026 Ranking Section */}
         <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-2xl p-6 mb-12 border border-amber-500/20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex-1">
@@ -135,13 +138,45 @@ export default function EducationPage() {
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-amber-500">#12</div>
-              <div className="text-white text-sm">AURAK</div>
+              <div className="text-white text-sm">American University of Ras Al Khaimah</div>
               <div className="text-slate-500 text-xs">Score 61.17</div>
             </div>
           </div>
         </div>
 
-      
+        {/* Informative Videos Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
+              <span className="text-amber-500 text-sm font-medium">📺 Vidéos Éducatives</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Découvrez les Universités et Opportunités
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Explorez les meilleures universités et opportunités d'études à travers des vidéos informatives.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <YoutubeVideoCard
+              videoId="9p2bW6dyWUw"
+              title="TOP 10 Universities in the UAE"
+              description="Découvrez le classement des 10 meilleures universités des Émirats Arabes Unis"
+            />
+            <YoutubeVideoCard
+              videoId="DDRyCOdnDmY"
+              title="European University of Armenia"
+              description="Présentation de l'Université Européenne d'Arménie - Programmes et opportunités"
+            />
+            <YoutubeVideoCard
+              videoId="e_EoMba4zeM"
+              title="European Universities Overview"
+              description="Aperçu des meilleures universités européennes pour les étudiants internationaux"
+            />
+          </div>
+        </div>
+
         <VideoBanner />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
