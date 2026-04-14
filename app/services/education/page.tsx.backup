@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'\nimport VideoBanner from "@/components/VideoBanner"
+import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'
 import ServiceInquiry from '../../../components/ServiceInquiry'
 import UniversityCard from '../../../components/UniversityCard'
 
@@ -92,7 +92,9 @@ export default function EducationPage() {
               <UniversityCard key={uni.slug} {...uni} />
             ))}
           </div>
-              </div>\n\n      {/* UNIRANKS 2026 Video Banner */}\n      <VideoBanner />\n\n      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column - Service Info */}
           <div>
             <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
