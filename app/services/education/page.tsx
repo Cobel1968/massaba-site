@@ -1,7 +1,8 @@
 ﻿'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'\nimport VideoBanner from "@/components/VideoBanner"
+import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'
+import VideoBanner from '@/components/VideoBanner'
 import ServiceInquiry from '../../../components/ServiceInquiry'
 import UniversityCard from '../../../components/UniversityCard'
 
@@ -19,8 +20,8 @@ export default function EducationPage() {
     {
       name: "Royal Victorian University (RVU)",
       country: "Arménie",
-      flag: "",
-      logo: "",
+      flag: "🇦🇲",
+      logo: "🎓",
       tagline: "Formation moderne et innovante en Arménie",
       slug: "rvu",
       badge: "Partenaire Officiel Massaba",
@@ -34,8 +35,8 @@ export default function EducationPage() {
     {
       name: "American University of Ras Al Khaimah (AURAK)",
       country: "Émirats Arabes Unis",
-      flag: "",
-      logo: "",
+      flag: "🇦🇪",
+      logo: "🇺🇸",
       tagline: "Style américain aux Émirats Arabes Unis",
       slug: "aurak",
       badge: "Partenaire Officiel Massaba",
@@ -50,8 +51,8 @@ export default function EducationPage() {
     {
       name: "Cobel Business Training Center",
       country: "Côte d'Ivoire",
-      flag: "",
-      logo: "",
+      flag: "🇨🇮",
+      logo: "🏢",
       tagline: "Formation professionnelle de qualité à Abidjan",
       slug: "cbtc",
       badge: "Partenaire Local Massaba",
@@ -83,7 +84,7 @@ export default function EducationPage() {
               Nos Universités & Centres de Formation Partenaires
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Étudiez avec des institutions reconnues dans le monde entier  partenariats exclusifs Massaba
+              Étudiez avec des institutions reconnues dans le monde entier – partenariats exclusifs Massaba
             </p>
           </div>
 
@@ -92,7 +93,12 @@ export default function EducationPage() {
               <UniversityCard key={uni.slug} {...uni} />
             ))}
           </div>
-              </div>\n\n      {/* UNIRANKS 2026 Video Banner */}\n      <VideoBanner />\n\n      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        </div>
+
+        {/* UNIRANKS 2026 Video Banner */}
+        <VideoBanner />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column - Service Info */}
           <div>
             <div className="relative h-80 rounded-xl overflow-hidden mb-6 bg-slate-800">
@@ -112,7 +118,7 @@ export default function EducationPage() {
               <h2 className="text-2xl font-bold text-white mb-4">What We Offer:</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {serviceFeatures.map((feature, index) => (
-                  <li key={index} className="text-slate-300"> {feature}</li>
+                  <li key={index} className="text-slate-300">✓ {feature}</li>
                 ))}
               </ul>
             </div>
@@ -124,10 +130,10 @@ export default function EducationPage() {
                 Accompagnement Complet
               </h3>
               <ul className="space-y-2 text-slate-300 text-sm">
-                <li> Accompagnement en français</li>
-                <li> Reconnaissance des diplômes en Côte d'Ivoire</li>
-                <li> Aide aux démarches consulaires (UAE / Arménie)</li>
-                <li> Processus de candidature simplifié via Massaba</li>
+                <li>✓ Accompagnement en français</li>
+                <li>✓ Reconnaissance des diplômes en Côte d'Ivoire</li>
+                <li>✓ Aide aux démarches consulaires (UAE / Arménie)</li>
+                <li>✓ Processus de candidature simplifié via Massaba</li>
               </ul>
             </div>
           </div>
