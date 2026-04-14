@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ArrowLeft, GraduationCap, Globe, BookOpen, Award } from 'lucide-react'
 import VideoBanner from '@/components/VideoBanner'
 import ServiceInquiry from '../../../components/ServiceInquiry'
-import UniversityCard from '../../../components/UniversityCard'
+import UniversityCard from '../../../components/UniversityCard'import YoutubeVideoCard from "@/components/YoutubeVideoCard"
 
 export default function EducationPage() {
   const serviceFeatures = [
@@ -93,9 +93,55 @@ export default function EducationPage() {
               <UniversityCard key={uni.slug} {...uni} />
             ))}
           </div>
+                {/* UNIRANKS 2026 Ranking Section */}
+        <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-2xl p-6 mb-12 border border-amber-500/20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 bg-amber-500/20 px-3 py-1 rounded-full mb-3">
+                <span className="text-amber-500 text-xs font-medium">🏆 UNIRANKS 2026</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Top Universities in United Arab Emirates</h3>
+              <p className="text-slate-400 text-sm">
+                Découvrez le classement officiel des meilleures universités des Émirats Arabes Unis.
+                Classement basé sur la qualité académique, la recherche et la valeur éducative.
+              </p>
+            </div>
+            <a 
+              href="https://www.uniranks.com/ranking/top-country/united-arab-emirates" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-6 py-3 rounded-lg transition whitespace-nowrap"
+            >
+              Voir le classement complet →
+            </a>
+          </div>
+          
+          {/* Top Universities Preview */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 pt-6 border-t border-amber-500/10">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-amber-500">#1</div>
+              <div className="text-white text-sm">United Arab Emirates University</div>
+              <div className="text-slate-500 text-xs">Score 83.8</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-amber-500">#2</div>
+              <div className="text-white text-sm">University of Sharjah</div>
+              <div className="text-slate-500 text-xs">Score 79.45</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-amber-500">#3</div>
+              <div className="text-white text-sm">American University of Sharjah</div>
+              <div className="text-slate-500 text-xs">Score 77.5</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-amber-500">#12</div>
+              <div className="text-white text-sm">AURAK</div>
+              <div className="text-slate-500 text-xs">Score 61.17</div>
+            </div>
+          </div>
         </div>
 
-        {/* UNIRANKS 2026 Video Banner */}
+      
         <VideoBanner />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
