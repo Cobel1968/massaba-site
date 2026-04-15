@@ -142,9 +142,49 @@ export default function EducationPage() {
               <div className="text-slate-500 text-xs">Score 61.17</div>
             </div>
           </div>
+                {/* European University of Armenia - Info Card */}
+        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-6 mb-8 border border-blue-500/20">
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 bg-blue-500/20 px-3 py-1 rounded-full mb-4">
+                <span className="text-blue-400 text-xs font-medium">🎓 European University of Armenia</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3">Welcome to EUA</h3>
+              <p className="text-slate-300 mb-4">
+                European University of Armenia - Empowering students with quality education and innovative learning experiences.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-amber-500 text-xl mb-1">🎓</div>
+                  <h4 className="text-white font-semibold text-sm">Quality Education</h4>
+                  <p className="text-slate-400 text-xs">Programmes alignés sur les normes européennes, diplômes internationalement reconnus</p>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-amber-500 text-xl mb-1">🌍</div>
+                  <h4 className="text-white font-semibold text-sm">Internationalisation</h4>
+                  <p className="text-slate-400 text-xs">Diplôme professionnel européen + opportunités de mobilité internationale</p>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-amber-500 text-xl mb-1">💼</div>
+                  <h4 className="text-white font-semibold text-sm">Formation Pratique</h4>
+                  <p className="text-slate-400 text-xs">Expérience pratique avec des spécialistes d'organisations leaders</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex-shrink-0">
+              <a 
+                href="https://eua.am" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition whitespace-nowrap"
+              >
+                Visiter le site EUA →
+              </a>
+            </div>
+          </div>
         </div>
 
-        {/* Informative Videos Section */}
+      
         <div className="mb-12">
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
@@ -166,8 +206,8 @@ export default function EducationPage() {
             />
             <YoutubeVideoCard
               videoId="DDRyCOdnDmY"
-              title="European University of Armenia"
-              description="Présentation de l'Université Européenne d'Arménie - Programmes et opportunités"
+              title="European University of Armenia (EUA)"
+              description="Découvrez l'European University of Armenia - une institution alignée sur les normes européennes, offrant des diplômes internationalement reconnus et des opportunités de mobilité internationale."
             />
             <YoutubeVideoCard
               videoId="e_EoMba4zeM"
