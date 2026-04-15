@@ -21,8 +21,8 @@ export default function EducationPage() {
     {
       name: "Royal Victorian University (RVU)",
       country: "Arménie",
-      flag: "🇦🇲",
-      logo: "🎓",
+      flag: "",
+      logo: "",
       tagline: "Formation moderne et innovante en Arménie",
       slug: "rvu",
       badge: "Partenaire Officiel Massaba",
@@ -36,8 +36,8 @@ export default function EducationPage() {
     {
       name: "American University of Ras Al Khaimah (AURAK)",
       country: "Émirats Arabes Unis",
-      flag: "🇦🇪",
-      logo: "🇺🇸",
+      flag: "",
+      logo: "",
       tagline: "Style américain aux Émirats Arabes Unis",
       slug: "aurak",
       badge: "Partenaire Officiel Massaba",
@@ -50,10 +50,25 @@ export default function EducationPage() {
       ]
     },
     {
+      name: "European University of Armenia (EUA)",
+      country: "Arménie",
+      flag: "",
+      logo: "",
+      tagline: "Formation de qualité aux normes européennes",
+      slug: "eua",
+      badge: "Partenaire Officiel Massaba",
+      highlights: [
+        "Diplômes internationalement reconnus",
+        "Normes européennes de qualité (ESG)",
+        "Opportunités de mobilité internationale",
+        "Formation pratique avec des experts"
+      ]
+    },
+    {
       name: "Cobel Business Training Center",
       country: "Côte d'Ivoire",
-      flag: "🇨🇮",
-      logo: "🏢",
+      flag: "",
+      logo: "",
       tagline: "Formation professionnelle de qualité à Abidjan",
       slug: "cbtc",
       badge: "Partenaire Local Massaba",
@@ -85,11 +100,11 @@ export default function EducationPage() {
               Nos Universités & Centres de Formation Partenaires
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Étudiez avec des institutions reconnues dans le monde entier – partenariats exclusifs Massaba
+              Étudiez avec des institutions reconnues dans le monde entier  partenariats exclusifs Massaba
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {partnerUniversities.map((uni) => (
               <UniversityCard key={uni.slug} {...uni} />
             ))}
@@ -101,7 +116,7 @@ export default function EducationPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 bg-amber-500/20 px-3 py-1 rounded-full mb-3">
-                <span className="text-amber-500 text-xs font-medium">🏆 UNIRANKS 2026</span>
+                <span className="text-amber-500 text-xs font-medium"> UNIRANKS 2026</span>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Top Universities in United Arab Emirates</h3>
               <p className="text-slate-400 text-sm">
@@ -115,7 +130,7 @@ export default function EducationPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-6 py-3 rounded-lg transition whitespace-nowrap"
             >
-              Voir le classement complet →
+              Voir le classement complet 
             </a>
           </div>
           
@@ -144,53 +159,11 @@ export default function EducationPage() {
           </div>
         </div>
 
-                {/* European University of Armenia (EUA) Section */}
-        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-6 mb-12 border border-blue-500/20">
-          <div className="flex flex-col md:flex-row gap-6">
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 bg-blue-500/20 px-3 py-1 rounded-full mb-4">
-                <span className="text-blue-400 text-xs font-medium"> European University of Armenia</span>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Welcome to EUA</h3>
-              <p className="text-slate-300 mb-4">
-                European University of Armenia - Empowering students with quality education and innovative learning experiences.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <div className="text-amber-500 text-xl mb-1"></div>
-                  <h4 className="text-white font-semibold text-sm">Quality Education</h4>
-                  <p className="text-slate-400 text-xs">Programmes alignés sur les normes européennes ESG</p>
-                </div>
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <div className="text-amber-500 text-xl mb-1"></div>
-                  <h4 className="text-white font-semibold text-sm">Internationalisation</h4>
-                  <p className="text-slate-400 text-xs">Diplôme professionnel européen + mobilité internationale</p>
-                </div>
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <div className="text-amber-500 text-xl mb-1"></div>
-                  <h4 className="text-white font-semibold text-sm">Formation Pratique</h4>
-                  <p className="text-slate-400 text-xs">Expérience avec des spécialistes d'organisations leaders</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex-shrink-0 flex flex-col gap-3">
-              <a 
-                href="https://eua.am/en" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition"
-              >
-                Visiter le site officiel EUA 
-              </a>
-            </div>
-          </div>
-        </div></div>
-
         {/* Informative Videos Section */}
         <div className="mb-12">
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
-              <span className="text-amber-500 text-sm font-medium">📺 Vidéos Éducatives</span>
+              <span className="text-amber-500 text-sm font-medium"> Vidéos Éducatives</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Découvrez les Universités et Opportunités
@@ -200,7 +173,7 @@ export default function EducationPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <YoutubeVideoCard
               videoId="9p2bW6dyWUw"
               title="TOP 10 Universities in the UAE"
@@ -241,7 +214,7 @@ export default function EducationPage() {
               <h2 className="text-2xl font-bold text-white mb-4">What We Offer:</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {serviceFeatures.map((feature, index) => (
-                  <li key={index} className="text-slate-300">✓ {feature}</li>
+                  <li key={index} className="text-slate-300"> {feature}</li>
                 ))}
               </ul>
             </div>
@@ -253,10 +226,10 @@ export default function EducationPage() {
                 Accompagnement Complet
               </h3>
               <ul className="space-y-2 text-slate-300 text-sm">
-                <li>✓ Accompagnement en français</li>
-                <li>✓ Reconnaissance des diplômes en Côte d'Ivoire</li>
-                <li>✓ Aide aux démarches consulaires (UAE / Arménie)</li>
-                <li>✓ Processus de candidature simplifié via Massaba</li>
+                <li> Accompagnement en français</li>
+                <li> Reconnaissance des diplômes en Côte d'Ivoire</li>
+                <li> Aide aux démarches consulaires (UAE / Arménie)</li>
+                <li> Processus de candidature simplifié via Massaba</li>
               </ul>
             </div>
           </div>
