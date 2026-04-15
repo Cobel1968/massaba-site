@@ -1,15 +1,16 @@
 ﻿'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, GraduationCap, Globe, BookOpen, Award, CheckCircle, Users, TrendingUp } from 'lucide-react'
+import { ArrowLeft, GraduationCap, Globe, BookOpen, Award, CheckCircle, Users, TrendingUp, Video, ExternalLink } from 'lucide-react'
 import ServiceInquiry from '../../../../components/ServiceInquiry'
+import YoutubeVideoCard from '../../../../components/YoutubeVideoCard'
 
 export default function EUAPage() {
   const programs = [
     {
       name: "Bachelor en Administration des Affaires",
       level: "Bachelor",
-      duration: "3-4 ans",
+      duration: "4 ans",
       language: "Anglais / Arménien",
       format: "Présentiel",
       fees: "Diplôme internationalement reconnu"
@@ -17,10 +18,10 @@ export default function EUAPage() {
     {
       name: "Bachelor en Informatique",
       level: "Bachelor",
-      duration: "3-4 ans",
+      duration: "4 ans",
       language: "Anglais",
       format: "Présentiel",
-      fees: "Normes européennes"
+      fees: "Normes européennes ESG"
     },
     {
       name: "Master en Gestion Internationale",
@@ -29,6 +30,14 @@ export default function EUAPage() {
       language: "Anglais",
       format: "Présentiel",
       fees: "Opportunités de mobilité"
+    },
+    {
+      name: "Master en Relations Internationales",
+      level: "Master",
+      duration: "2 ans",
+      language: "Anglais / Arménien",
+      format: "Présentiel",
+      fees: "Diplôme européen"
     }
   ]
 
@@ -55,13 +64,53 @@ export default function EUAPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2 text-slate-200">
-                <Globe className="w-5 h-5" /> 🇦🇲 Arménie
+                <Globe className="w-5 h-5" />  Arménie
               </div>
               <div className="flex items-center gap-2 text-slate-200">
                 <Users className="w-5 h-5" /> Communauté internationale
               </div>
               <div className="flex items-center gap-2 text-slate-200">
                 <TrendingUp className="w-5 h-5" /> Diplômes reconnus
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Official Website Button */}
+        <div className="mb-8 flex justify-center">
+          <a 
+            href="https://eua.am/en" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl transition text-lg shadow-lg hover:shadow-blue-500/20"
+          >
+            <ExternalLink className="w-5 h-5" />
+            Visiter le site officiel de l'EUA
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Video Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6">Découvrez l'EUA en vidéo</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <YoutubeVideoCard
+              videoId="DDRyCOdnDmY"
+              title="European University of Armenia"
+              description="Présentation de l'Université Européenne d'Arménie"
+            />
+            <div className="bg-slate-800 rounded-xl p-6 flex items-center justify-center">
+              <div className="text-center">
+                <Video className="w-12 h-12 text-blue-500 mx-auto mb-4" />
+                <p className="text-slate-400 text-sm">Plus de vidéos disponibles sur le site officiel</p>
+                <a 
+                  href="https://eua.am/en" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 text-blue-400 hover:text-blue-300"
+                >
+                  Visiter le site EUA 
+                </a>
               </div>
             </div>
           </div>
@@ -74,7 +123,7 @@ export default function EUAPage() {
               <h2 className="text-2xl font-bold text-white mb-4">Pourquoi choisir EUA ?</h2>
               <p className="text-slate-300 mb-6">
                 L'European University of Armenia offre des programmes académiques entièrement alignés sur 
-                les normes et directives européennes pour l'assurance qualité dans l'enseignement supérieur.
+                les normes et directives européennes pour l'assurance qualité dans l'enseignement supérieur (ESG).
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -139,6 +188,16 @@ export default function EUAPage() {
                   <span className="text-white">Diplômes internationaux</span>
                 </div>
               </div>
+              <div className="mt-6 pt-6 border-t border-slate-700">
+                <a 
+                  href="https://eua.am/en" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+                >
+                  Site officiel EUA
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -146,12 +205,12 @@ export default function EUAPage() {
         {/* Programs Section */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Programmes Disponibles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programs.map((program, index) => (
               <div key={index} className="bg-slate-800 rounded-xl p-6 hover:shadow-lg hover:shadow-blue-500/10 transition">
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h3 className="text-lg font-semibold text-white">{program.name}</h3>
+                    <h3 className="text-base font-semibold text-white">{program.name}</h3>
                     <span className="inline-block px-2 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs mt-2">
                       {program.level}
                     </span>
@@ -178,7 +237,7 @@ export default function EUAPage() {
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-700">
                   <span className="inline-block px-2 py-1 bg-slate-700 rounded text-xs text-slate-300">
-                    Via Massaba – Processus simplifié
+                    Via Massaba  Processus simplifié
                   </span>
                 </div>
               </div>
@@ -194,12 +253,12 @@ export default function EUAPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a 
-              href="https://eua.am" 
+              href="https://eua.am/en" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3 rounded-lg transition"
             >
-              Visiter le site EUA
+              Visiter le site officiel EUA
             </a>
             <ServiceInquiry serviceName="EUA - European University of Armenia" />
           </div>
