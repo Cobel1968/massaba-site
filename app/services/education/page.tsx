@@ -142,8 +142,10 @@ export default function EducationPage() {
               <div className="text-slate-500 text-xs">Score 61.17</div>
             </div>
           </div>
-                {/* European University of Armenia - Info Card */}
-        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-6 mb-8 border border-blue-500/20">
+        </div>
+
+        {/* European University of Armenia (EUA) Section */}
+        <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-6 mb-12 border border-blue-500/20">
           <div className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 bg-blue-500/20 px-3 py-1 rounded-full mb-4">
@@ -184,7 +186,7 @@ export default function EducationPage() {
           </div>
         </div>
 
-      
+        {/* Informative Videos Section */}
         <div className="mb-12">
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
@@ -207,7 +209,7 @@ export default function EducationPage() {
             <YoutubeVideoCard
               videoId="DDRyCOdnDmY"
               title="European University of Armenia (EUA)"
-              description="Découvrez l'European University of Armenia - une institution alignée sur les normes européennes, offrant des diplômes internationalement reconnus et des opportunités de mobilité internationale."
+              description="Découvrez l'European University of Armenia - une institution alignée sur les normes européennes"
             />
             <YoutubeVideoCard
               videoId="e_EoMba4zeM"
