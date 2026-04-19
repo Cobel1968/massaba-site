@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Globe, CheckCircle, Plane, Hotel, Umbrella, Coffee, MapPin, Phone, Mail, Clock, Users, Camera, Sun, Waves, Mountain, Building, Landmark, Heart } from 'lucide-react'
 import ServiceInquiry from '../../../components/ServiceInquiry'
+import TourismVideo from '../../../components/TourismVideo'
 
 export default function TourismPage() {
   const destinations = [
@@ -105,6 +106,25 @@ export default function TourismPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Promotional Video Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
+              <span className="text-amber-500 text-sm font-medium">🎬 Vidéo de Promotion</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Découvrez la Côte d'Ivoire en Vidéo
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Un aperçu visuel des merveilles touristiques de la Côte d'Ivoire
+            </p>
+          </div>
+          <TourismVideo videoId="_VrWeJov7jM" />
+          <p className="text-center text-slate-500 text-sm mt-4">
+            🌍 La Côte d'Ivoire vous attend - Découvrez ses paysages, sa culture et son hospitalité légendaire
+          </p>
         </div>
 
         {/* Visa Services Section */}

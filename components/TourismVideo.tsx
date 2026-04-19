@@ -3,15 +3,11 @@ import { useState } from 'react'
 import { Play, X } from 'lucide-react'
 
 interface TourismVideoProps {
-  videoUrl?: string
+  videoId?: string
 }
 
-export default function TourismVideo({ videoUrl }: TourismVideoProps) {
+export default function TourismVideo({ videoId = "_VrWeJov7jM" }: TourismVideoProps) {
   const [isOpen, setIsOpen] = useState(false)
-  
-  // Video ID from the provided YouTube link: _VrWeJov7jM
-  const defaultVideoId = "_VrWeJov7jM"
-  const videoId = videoUrl || defaultVideoId
   
   return (
     <>
