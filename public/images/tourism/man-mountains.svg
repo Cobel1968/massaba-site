@@ -1,0 +1,6 @@
+﻿<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1e293b"/>
+  <rect x="0" y="0" width="800" height="600" fill="#f59e0b" opacity="0.1"/>
+  <text x="400" y="280" text-anchor="middle" fill="#f59e0b" font-size="24" font-weight="bold">Image Coming Soon</text>
+  <text x="400" y="320" text-anchor="middle" fill="#94a3b8" font-size="14">Massaba Consulting</text>
+</svg>

@@ -11,42 +11,42 @@ export default function TourismPage() {
     {
       name: "Grand-Bassam",
       region: "Sud-Est",
-      image: "/images/tourism/grand-bassam.jpg",
+      image: "/images/tourism/grand-bassam.svg",
       description: "Ancienne capitale coloniale, patrimoine mondial de l'UNESCO",
       attractions: ["Maison du Gouverneur", "Plage de Grand-Bassam", "Musée des Civilisations"]
     },
     {
       name: "Man & Les Montagnes",
       region: "Ouest",
-      image: "/images/tourism/man-mountains.jpg",
+      image: "/images/tourism/man-mountains.svg",
       description: "Paysage montagneux exceptionnel, cascades et forêts tropicales",
       attractions: ["Mont Tonkoui", "Cascade de la Semien", "La Dent de Man"]
     },
     {
       name: "Yamoussoukro",
       region: "Centre",
-      image: "/images/tourism/yamoussoukro.jpg",
+      image: "/images/tourism/yamoussoukro.svg",
       description: "Capitale politique avec la plus grande basilique du monde",
       attractions: ["Basilique Notre-Dame de la Paix", "Fondation Félix Houphouët-Boigny", "Lac aux Caïmans"]
     },
     {
       name: "San Pedro & La Côte",
       region: "Sud-Ouest",
-      image: "/images/tourism/san-pedro.jpg",
+      image: "/images/tourism/san-pedro.svg",
       description: "Plages paradisiaques et forêt classée de Taï",
       attractions: ["Plage de San Pedro", "Parc National de Taï", "Rocher de San Pedro"]
     },
     {
       name: "Korhogo & Le Nord",
       region: "Nord",
-      image: "/images/tourism/korhogo.jpg",
+      image: "/images/tourism/korhogo.svg",
       description: "Capitale du Sénoufo, artisanat et culture authentique",
       attractions: ["Marché d'artisanat", "Mont Korhogo", "Village de Niofoin"]
     },
     {
       name: "Abidjan",
       region: "Sud",
-      image: "/images/tourism/abidjan.jpg",
+      image: "/images/tourism/abidjan.svg",
       description: "Métropole moderne, vie nocturne vibrante et lagunes",
       attractions: ["Plateau", "Banco National Park", "Stade Félix Houphouët-Boigny"]
     }

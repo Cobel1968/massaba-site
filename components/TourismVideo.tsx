@@ -8,6 +8,7 @@ interface TourismVideoProps {
 
 export default function TourismVideo({ videoId = "_VrWeJov7jM" }: TourismVideoProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [imageError, setImageError] = useState(false)
   
   return (
     <>
@@ -16,14 +17,24 @@ export default function TourismVideo({ videoId = "_VrWeJov7jM" }: TourismVideoPr
         className="relative aspect-video rounded-2xl overflow-hidden cursor-pointer group bg-slate-800 shadow-xl"
       >
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10" />
-        <img 
-          src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-          alt="Côte d'Ivoire Tourism Video"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          onError={(e) => {
-            e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-          }}
-        />
+        {!imageError ? (
+          <img 
+            src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+            alt="Côte d'Ivoire Tourism Video"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-24 h-24 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Play className="w-10 h-10 text-slate-900 ml-1" />
+              </div>
+              <p className="text-white text-xl font-semibold">Côte d'Ivoire</p>
+              <p className="text-slate-300">Venez voir</p>
+            </div>
+          </div>
+        )}
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center group-hover:scale-110 transition shadow-xl">
             <Play className="w-8 h-8 text-slate-900 ml-1" />
