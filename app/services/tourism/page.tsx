@@ -4,8 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Globe, CheckCircle, Plane, Hotel, Umbrella, Coffee, MapPin, Phone, Mail, Clock, Users, Camera, Sun, Waves, Mountain, Building, Landmark, Heart } from 'lucide-react'
 import ServiceInquiry from '../../../components/ServiceInquiry'
-import DestinationVideo from "@/components/DestinationVideo"
 import TourismVideo from '../../../components/TourismVideo'
+import DestinationVideo from '../../../components/DestinationVideo'
 
 export default function TourismPage() {
   const destinations = [
@@ -14,42 +14,54 @@ export default function TourismPage() {
       region: "Sud-Est",
       image: "/images/tourism/grand-bassam.svg",
       description: "Ancienne capitale coloniale, patrimoine mondial de l'UNESCO",
-      attractions: ["Maison du Gouverneur", "Plage de Grand-Bassam", "Musée des Civilisations"]
+      attractions: ["Maison du Gouverneur", "Plage de Grand-Bassam", "Musée des Civilisations"],
+      videoId: "JTZxB76Grig",
+      videoTitle: "Vue aérienne de Grand-Bassam"
     },
     {
       name: "Man & Les Montagnes",
       region: "Ouest",
       image: "/images/tourism/man-mountains.svg",
       description: "Paysage montagneux exceptionnel, cascades et forêts tropicales",
-      attractions: ["Mont Tonkoui", "Cascade de la Semien", "La Dent de Man"]
+      attractions: ["Mont Tonkoui", "Cascade de la Semien", "La Dent de Man"],
+      videoId: "nJI467D6xq8",
+      videoTitle: "Découvrez les 18 montagnes de Man"
     },
     {
       name: "Yamoussoukro",
       region: "Centre",
       image: "/images/tourism/yamoussoukro.svg",
       description: "Capitale politique avec la plus grande basilique du monde",
-      attractions: ["Basilique Notre-Dame de la Paix", "Fondation Félix Houphouët-Boigny", "Lac aux Caïmans"]
+      attractions: ["Basilique Notre-Dame de la Paix", "Fondation Félix Houphouët-Boigny", "Lac aux Caïmans"],
+      videoId: "jLZbZwJmSTo",
+      videoTitle: "City Tour - Yamoussoukro"
     },
     {
       name: "San Pedro & La Côte",
       region: "Sud-Ouest",
       image: "/images/tourism/san-pedro.svg",
       description: "Plages paradisiaques et forêt classée de Taï",
-      attractions: ["Plage de San Pedro", "Parc National de Taï", "Rocher de San Pedro"]
+      attractions: ["Plage de San Pedro", "Parc National de Taï", "Rocher de San Pedro"],
+      videoId: "PtbHHSnNVBM",
+      videoTitle: "San Pedro & La Côte"
     },
     {
       name: "Korhogo & Le Nord",
       region: "Nord",
       image: "/images/tourism/korhogo.svg",
       description: "Capitale du Sénoufo, artisanat et culture authentique",
-      attractions: ["Marché d'artisanat", "Mont Korhogo", "Village de Niofoin"]
+      attractions: ["Marché d'artisanat", "Mont Korhogo", "Village de Niofoin"],
+      videoId: "WfH010lbNC4",
+      videoTitle: "Korhogo & Le Nord"
     },
     {
       name: "Abidjan",
       region: "Sud",
       image: "/images/tourism/abidjan.svg",
       description: "Métropole moderne, vie nocturne vibrante et lagunes",
-      attractions: ["Plateau", "Banco National Park", "Stade Félix Houphouët-Boigny"]
+      attractions: ["Plateau", "Banco National Park", "Stade Félix Houphouët-Boigny"],
+      videoId: "FKixnj7Gij8",
+      videoTitle: "Abidjan"
     }
   ]
 
@@ -213,6 +225,11 @@ export default function TourismPage() {
                     alt={dest.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onError={(e) => { e.target.src = '/images/placeholders/tourism-placeholder.jpg' }}
+                  />
+                  <DestinationVideo 
+                    videoId={dest.videoId} 
+                    title={dest.videoTitle} 
+                    destinationName={dest.name} 
                   />
                 </div>
                 <div className="p-4">
