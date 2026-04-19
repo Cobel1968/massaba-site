@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Globe, CheckCircle, Plane, Hotel, Umbrella, Coffee, MapPin, Phone, Mail, Clock, Users, Camera, Sun, Waves, Mountain, Building, Landmark, Heart } from 'lucide-react'
 import ServiceInquiry from '../../../components/ServiceInquiry'
+import DestinationVideo from "@/components/DestinationVideo"
 import TourismVideo from '../../../components/TourismVideo'
 
 export default function TourismPage() {
