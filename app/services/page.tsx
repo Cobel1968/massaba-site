@@ -2,6 +2,13 @@
 import Image from 'next/image';
 
 const services = [
+  {
+    slug: 'tourism',
+    title: 'Tourisme & Visa CI',
+    desc: 'Découvrez la Côte d\'Ivoire avec Massaba. Obtenez votre visa facilement et explorez les merveilles touristiques du pays.',
+    image: '/images/tourism/ivory-coast.jpg',
+    icon: '🌍'
+  },
   { slug: 'b2b-consultancy', title: 'B2B Consultancy', desc: 'Strategic advisory for corporate growth and high-value partnerships.', image: '/images/b2b-consultancy/B2Bmeetings.jpg' },
   { slug: 'education', title: 'Education Consultancy', desc: 'Expert guidance for university admissions and international studies.', image: '/images/education/AccueilAssure.jpg' },
   { slug: 'government-liaison', title: 'Government Liaison', desc: 'Seamless PRO services and official approvals.', image: '/images/government-liaison/Governmenttenders.jpg' },
