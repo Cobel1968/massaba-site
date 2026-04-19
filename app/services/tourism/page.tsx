@@ -224,7 +224,7 @@ export default function TourismPage() {
                     src={dest.image}
                     alt={dest.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => { e.target.src = '/images/placeholders/tourism-placeholder.jpg' }}
+                    onError={(e) => { e.target.src = '/images/placeholders/tourism-placeholder.svg' }}
                   />
                   <DestinationVideo 
                     videoId={dest.videoId} 
