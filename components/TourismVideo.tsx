@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState } from 'react'
 import { Play, X } from 'lucide-react'
 
@@ -6,7 +6,7 @@ interface TourismVideoProps {
   videoId?: string
 }
 
-export default function TourismVideo({ videoId = "_VrWeJov7jM" }: TourismVideoProps) {
+export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [imageError, setImageError] = useState(false)
   
@@ -64,7 +64,7 @@ export default function TourismVideo({ videoId = "_VrWeJov7jM" }: TourismVideoPr
             </div>
             <div className="aspect-video bg-black">
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0`}
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
