@@ -1,16 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Keep your existing images config
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
-        port: '', // Leave empty for default port
-        pathname: '/**', // Allow all paths under the hostname
+        port: '',
+        pathname: '/**',
       },
     ],
+  },
+
+  // Force disable Turbopack completely and use Webpack (stable)
+  experimental: {
+    turbopack: false,           // This is the key for newer Next.js versions
+  },
+
+  // Extra safety: ensure webpack is used
+  webpack: (config) => {
+    return config;
   },
 };
 

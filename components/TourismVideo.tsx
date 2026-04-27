@@ -1,14 +1,15 @@
-'use client'
-import { useState } from 'react'
-import { Play, X } from 'lucide-react'
+'use client';
+
+import { useState } from 'react';
+import { Play, X } from 'lucide-react';
 
 interface TourismVideoProps {
-  videoId?: string
+  videoId?: string;
 }
 
 export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [imageError, setImageError] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
   
   return (
     <>
@@ -17,6 +18,7 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
         className="relative aspect-video rounded-2xl overflow-hidden cursor-pointer group bg-slate-800 shadow-xl"
       >
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent z-10" />
+        
         {!imageError ? (
           <img 
             src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
@@ -35,11 +37,13 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
             </div>
           </div>
         )}
+
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <div className="w-20 h-20 bg-amber-500 rounded-full flex items-center justify-center group-hover:scale-110 transition shadow-xl">
             <Play className="w-8 h-8 text-slate-900 ml-1" />
           </div>
         </div>
+
         <div className="absolute bottom-4 left-4 right-4 z-20">
           <p className="text-white font-semibold text-lg">Côte d'Ivoire, venez voir</p>
           <p className="text-slate-300 text-sm">Vidéo promotionnelle - Regardez maintenant</p>
@@ -62,6 +66,7 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
                 <X className="w-5 h-5 text-slate-400" />
               </button>
             </div>
+            
             <div className="aspect-video bg-black">
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0`}
@@ -71,6 +76,7 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
                 title="Côte d'Ivoire Tourism Video"
               />
             </div>
+
             <div className="p-4 bg-slate-800/50 border-t border-slate-700">
               <p className="text-slate-400 text-sm text-center">
                 Côte d'Ivoire, venez voir - Découvrez un pays accueillant aux multiples facettes
@@ -80,5 +86,5 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
         </div>
       )}
     </>
-  )
+  );
 }
