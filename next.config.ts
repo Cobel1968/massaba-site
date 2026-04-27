@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Keep your existing images config
+  // Your existing images configuration
   images: {
     remotePatterns: [
       {
@@ -13,15 +13,7 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Force disable Turbopack completely and use Webpack (stable)
-  experimental: {
-    turbopack: false,           // This is the key for newer Next.js versions
-  },
-
-  // Extra safety: ensure webpack is used
-  webpack: (config) => {
-    return config;
-  },
+  // No webpack config needed anymore — we'll control it via build flag
 };
 
 export default nextConfig;
