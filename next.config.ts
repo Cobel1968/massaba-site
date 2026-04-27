@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Your existing images configuration
+  // Your existing images configuration (important for Unsplash etc.)
   images: {
     remotePatterns: [
       {
@@ -13,7 +13,13 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // No webpack config needed anymore — we'll control it via build flag
+  // This silences the Turbopack + webpack conflict in Next.js 16
+  turbopack: {},
+
+  // Optional: keep this for extra safety
+  webpack: (config) => {
+    return config;
+  },
 };
 
 export default nextConfig;
