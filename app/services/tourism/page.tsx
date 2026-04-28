@@ -80,7 +80,7 @@ export default function TourismPage() {
     {
       name: "Visa de Long Séjour",
       duration: "6 mois à 1 an",
-      price: "À partir de 500$",
+      price: "À partir de 750$",
       features: ["Étudiants", "Bénévoles", "Volontaires"]
     }
   ]
