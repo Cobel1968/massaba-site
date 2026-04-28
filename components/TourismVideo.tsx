@@ -1,15 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Play, X } from 'lucide-react';
 
 interface TourismVideoProps {
   videoId?: string;
+  autoPlay?: boolean;
 }
 
-export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoProps) {
+export default function TourismVideo({ videoId = "_Fs78U1i3sU", autoPlay = true }: TourismVideoProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [hasAutoPlayed, setHasAutoPlayed] = useState(false);
+  
+  // Auto-play video when page loads (for intro video)
+  useEffect(() => {
+    if (autoPlay && !hasAutoPlayed && videoId === "_Fs78U1i3sU") {
+      // Small delay to ensure page is loaded
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        setHasAutoPlayed(true);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [autoPlay, hasAutoPlayed, videoId]);
   
   return (
     <>
@@ -45,7 +60,7 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
         </div>
 
         <div className="absolute bottom-4 left-4 right-4 z-20">
-          <p className="text-white font-semibold text-lg">Côte d'Ivoire, venez voir</p>
+          <p className="text-white font-semibold text-lg">Bienvenue en Côte d'Ivoire</p>
           <p className="text-slate-300 text-sm">Vidéo promotionnelle - Regardez maintenant</p>
         </div>
       </div>
@@ -56,8 +71,8 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
           <div className="relative w-full max-w-4xl bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-amber-500/20">
             <div className="flex items-center justify-between p-4 bg-gradient-to-r from-amber-500/10 to-orange-500/10">
               <div>
-                <h2 className="text-xl font-bold text-white">Côte d'Ivoire Touristique</h2>
-                <p className="text-slate-400 text-sm">Découvrez les merveilles de la Côte d'Ivoire</p>
+                <h2 className="text-xl font-bold text-white">Bienvenue en Côte d'Ivoire</h2>
+                <p className="text-slate-400 text-sm">Découvrez un pays accueillant aux multiples facettes</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -69,7 +84,7 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
             
             <div className="aspect-video bg-black">
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0`}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1`}
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -79,7 +94,7 @@ export default function TourismVideo({ videoId = "_Fs78U1i3sU" }: TourismVideoPr
 
             <div className="p-4 bg-slate-800/50 border-t border-slate-700">
               <p className="text-slate-400 text-sm text-center">
-                Côte d'Ivoire, venez voir - Découvrez un pays accueillant aux multiples facettes
+                🇨🇮 La Côte d'Ivoire vous attend - Découvrez ses paysages, sa culture et son hospitalité légendaire
               </p>
             </div>
           </div>

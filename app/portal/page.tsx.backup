@@ -1,54 +1,16 @@
-'use client'
-
+﻿'use client'
 import { useState, useEffect } from 'react'
+import { User } from '@supabase/supabase-js'
 import { supabase } from '../../lib/supabase'
 import { User, FileText, CreditCard, LogOut, ArrowLeft, Clock, CheckCircle, XCircle } from 'lucide-react'
 import Link from 'next/link'
 
-// Define proper types
-type UserType = {
-  id: string
-  email?: string
-}
-
-type ProfileType = {
-  full_name: string
-  client_number: string
-}
-
-type EnrollmentType = {
-  id: string
-  service_type: string
-  enrollment_date: string
-  status: string
-  package_selected?: string
-  remaining_balance?: number
-}
-
-type TransactionType = {
-  id: string
-  amount: number
-  description: string
-  payment_method: string
-  created_at: string
-  vat_amount?: number
-}
-
-type InvoiceType = {
-  id: string
-  invoice_number: string
-  due_date: string
-  total_amount: number
-  status: string
-  created_at: string
-}
-
 export default function PortalPage() {
-  const [user, setUser] = useState<UserType | null>(null)
-  const [profile, setProfile] = useState<ProfileType | null>(null)
-  const [enrollments, setEnrollments] = useState<EnrollmentType[]>([])
-  const [transactions, setTransactions] = useState<TransactionType[]>([])
-  const [invoices, setInvoices] = useState<InvoiceType[]>([])
+  const [user, setUser] = useState<User | null>(null)
+  const [profile, setProfile] = useState(null)
+  const [enrollments, setEnrollments] = useState([])
+  const [transactions, setTransactions] = useState([])
+  const [invoices, setInvoices] = useState([])
   const [activeTab, setActiveTab] = useState('dashboard')
   const [loading, setLoading] = useState(true)
 
@@ -57,72 +19,59 @@ export default function PortalPage() {
   }, [])
 
   const checkUser = async () => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session?.user) {
-        setUser({ id: session.user.id, email: session.user.email ?? undefined })
-        await loadUserData(session.user.id)
-      }
-      setLoading(false)
-
-      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-        setUser(session?.user ? { id: session.user.id, email: session.user.email ?? undefined } : null)
-        if (session?.user) loadUserData(session.user.id)
-      })
-
-      return () => subscription.unsubscribe()
-    } catch (error) {
-      console.error('Error checking user:', error)
-      setLoading(false)
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session?.user) {
+      setUser(session?.user ?? null)
+      await loadUserData(session.user.id)
     }
+    setLoading(false)
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+      if (session?.user) loadUserData(session.user.id)
+    })
+
+    return () => subscription.unsubscribe()
   }
 
-  const loadUserData = async (userId: string) => {
-    try {
-      // Load profile
-      const { data: profileData } = await supabase
-        .from('clients')
-        .select('*')
-        .eq('id', userId)
-        .single()
-      setProfile(profileData)
+  const loadUserData = async (userId) => {
+    // Load profile
+    const { data: profileData } = await supabase
+      .from('clients')
+      .select('*')
+      .eq('id', userId)
+      .single()
+    setProfile(profileData)
 
-      // Load service enrollments
-      const { data: enrollmentsData } = await supabase
-        .from('service_enrollments')
-        .select('*')
-        .eq('client_id', userId)
-        .order('created_at', { ascending: false })
-      setEnrollments(enrollmentsData || [])
+    // Load service enrollments
+    const { data: enrollmentsData } = await supabase
+      .from('service_enrollments')
+      .select('*')
+      .eq('client_id', userId)
+      .order('created_at', { ascending: false })
+    setEnrollments(enrollmentsData || [])
 
-      // Load transactions
-      const { data: transactionsData } = await supabase
-        .from('transactions')
-        .select('*')
-        .eq('client_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(10)
-      setTransactions(transactionsData || [])
+    // Load transactions
+    const { data: transactionsData } = await supabase
+      .from('transactions')
+      .select('*')
+      .eq('client_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(10)
+    setTransactions(transactionsData || [])
 
-      // Load invoices
-      const { data: invoicesData } = await supabase
-        .from('invoices')
-        .select('*')
-        .eq('client_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(10)
-      setInvoices(invoicesData || [])
-    } catch (error) {
-      console.error('Error loading user data:', error)
-    }
+    // Load invoices
+    const { data: invoicesData } = await supabase
+      .from('invoices')
+      .select('*')
+      .eq('client_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(10)
+    setInvoices(invoicesData || [])
   }
 
   const handleLogout = async () => {
-    try {
-      await supabase.auth.signOut()
-    } catch (error) {
-      console.error('Error signing out:', error)
-    }
+    await supabase.auth.signOut()
   }
 
   if (loading) {
@@ -137,7 +86,7 @@ export default function PortalPage() {
     return (
       <div className="min-h-screen bg-slate-950 pt-24 pb-20">
         <div className="max-w-md mx-auto px-4">
-          <Link href="/" className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 mb-8 transition">
+          <Link href="/" className="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 mb-8">
             <ArrowLeft size={20} /> Back to Home
           </Link>
           <div className="bg-slate-800 rounded-xl p-8">
@@ -148,22 +97,18 @@ export default function PortalPage() {
             </div>
             
             <div className="space-y-4">
-              <Link href="/login" className="block w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold text-center py-3 rounded-lg transition">
+              <a href="/login" className="block w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold text-center py-3 rounded-lg transition">
                 Sign In
-              </Link>
-              <Link href="/signup" className="block w-full bg-slate-700 hover:bg-slate-600 text-white text-center py-3 rounded-lg transition">
+              </a>
+              <a href="/signup" className="block w-full bg-slate-700 hover:bg-slate-600 text-white text-center py-3 rounded-lg transition">
                 Create Account
-              </Link>
+              </a>
             </div>
           </div>
         </div>
       </div>
     )
   }
-
-  const totalPaid = transactions.reduce((sum, t) => sum + (t.amount || 0), 0)
-  const pendingInvoices = invoices.filter(i => i.status === 'pending').length
-  const activeEnrollments = enrollments.filter(e => e.status === 'active').length
 
   return (
     <div className="min-h-screen bg-slate-950 pt-20 pb-20">
@@ -177,7 +122,7 @@ export default function PortalPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">
-                  Welcome, {profile?.full_name || user.email?.split('@')[0] || 'User'}
+                  Welcome, {profile?.full_name || user.email?.split('@')[0]}
                 </h1>
                 <p className="text-slate-400 text-sm">
                   Client ID: {profile?.client_number || 'Loading...'}
@@ -206,7 +151,7 @@ export default function PortalPage() {
             <div className="flex items-center justify-between mb-2">
               <CreditCard className="w-8 h-8 text-green-500" />
               <span className="text-2xl font-bold text-white">
-                AED {totalPaid.toFixed(2)}
+                AED {transactions.reduce((sum, t) => sum + (t.amount || 0), 0).toFixed(2)}
               </span>
             </div>
             <p className="text-slate-400 text-sm">Total Paid</p>
@@ -214,14 +159,18 @@ export default function PortalPage() {
           <div className="bg-slate-800 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
               <Clock className="w-8 h-8 text-yellow-500" />
-              <span className="text-2xl font-bold text-white">{pendingInvoices}</span>
+              <span className="text-2xl font-bold text-white">
+                {invoices.filter(i => i.status === 'pending').length}
+              </span>
             </div>
             <p className="text-slate-400 text-sm">Pending Invoices</p>
           </div>
           <div className="bg-slate-800 rounded-xl p-6">
             <div className="flex items-center justify-between mb-2">
               <CheckCircle className="w-8 h-8 text-blue-500" />
-              <span className="text-2xl font-bold text-white">{activeEnrollments}</span>
+              <span className="text-2xl font-bold text-white">
+                {enrollments.filter(e => e.status === 'active').length}
+              </span>
             </div>
             <p className="text-slate-400 text-sm">Active Enrollments</p>
           </div>
@@ -233,11 +182,7 @@ export default function PortalPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 capitalize transition ${
-                activeTab === tab 
-                  ? 'text-amber-500 border-b-2 border-amber-500' 
-                  : 'text-slate-400 hover:text-white'
-              }`}
+              className="px-4 py-2 capitalize transition"
             >
               {tab}
             </button>
@@ -262,11 +207,7 @@ export default function PortalPage() {
                           Enrolled: {new Date(enrollment.enrollment_date).toLocaleDateString()}
                         </p>
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        enrollment.status === 'active' 
-                          ? 'bg-green-500/20 text-green-400' 
-                          : 'bg-yellow-500/20 text-yellow-400'
-                      }`}>
+                      <span className="px-2 py-1 rounded-full text-xs">
                         {enrollment.status}
                       </span>
                     </div>
@@ -287,7 +228,7 @@ export default function PortalPage() {
                       <div>
                         <p className="text-white font-medium">{tx.description || 'Payment'}</p>
                         <p className="text-slate-400 text-sm">
-                          {new Date(tx.created_at).toLocaleDateString()} • {tx.payment_method}
+                          {new Date(tx.created_at).toLocaleDateString()} Ã¢â‚¬Â¢ {tx.payment_method}
                         </p>
                       </div>
                       <p className="text-green-400 font-bold">AED {tx.amount?.toFixed(2)}</p>
@@ -306,9 +247,9 @@ export default function PortalPage() {
             {enrollments.length === 0 ? (
               <div className="text-center py-8">
                 <p className="text-slate-400 mb-4">You haven't enrolled in any services yet.</p>
-                <Link href="/services" className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 px-6 py-2 rounded-lg transition">
+                <a href="/services" className="inline-block bg-amber-500 hover:bg-amber-600 text-slate-900 px-6 py-2 rounded-lg transition">
                   Browse Services
-                </Link>
+                </a>
               </div>
             ) : (
               <div className="space-y-4">
@@ -316,18 +257,14 @@ export default function PortalPage() {
                   <div key={enrollment.id} className="border border-slate-700 rounded-lg p-4">
                     <div className="flex justify-between items-start mb-3">
                       <h4 className="text-lg font-semibold text-white">{enrollment.service_type}</h4>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        enrollment.status === 'active' 
-                          ? 'bg-green-500/20 text-green-400' 
-                          : 'bg-yellow-500/20 text-yellow-400'
-                      }`}>
+                      <span className="px-2 py-1 rounded-full text-xs">
                         {enrollment.status}
                       </span>
                     </div>
                     {enrollment.package_selected && (
                       <p className="text-slate-400 text-sm mb-2">Package: {enrollment.package_selected}</p>
                     )}
-                    {enrollment.remaining_balance && enrollment.remaining_balance > 0 && (
+                    {enrollment.remaining_balance > 0 && (
                       <p className="text-amber-500 text-sm">Remaining: AED {enrollment.remaining_balance?.toFixed(2)}</p>
                     )}
                   </div>
@@ -353,7 +290,7 @@ export default function PortalPage() {
                       <th className="text-left py-2 text-slate-400">Method</th>
                       <th className="text-right py-2 text-slate-400">Amount</th>
                       <th className="text-right py-2 text-slate-400">VAT</th>
-                    </tr>
+                     </tr>
                   </thead>
                   <tbody>
                     {transactions.map((tx) => (
@@ -389,11 +326,7 @@ export default function PortalPage() {
                       </div>
                       <div className="text-right">
                         <p className="text-white font-bold">AED {invoice.total_amount?.toFixed(2)}</p>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          invoice.status === 'paid' 
-                            ? 'bg-green-500/20 text-green-400' 
-                            : 'bg-red-500/20 text-red-400'
-                        }`}>
+                        <span className={	ext-xs }>
                           {invoice.status}
                         </span>
                       </div>

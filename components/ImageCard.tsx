@@ -1,22 +1,12 @@
-﻿'use client';
-
-;
-
+﻿import Image from 'next/image';
 interface ImageCardProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  title?: string;
+  description?: string;
   className?: string;
 }
-
-export default function ImageCard({
-  src,
-  alt,
-  width = 800,
-  height = 600,
-  className = '',
-}: ImageCardProps) {
+export default function ImageCard({ src, alt, title, description, className = '' }: ImageCardProps) {
   return (
     <div className={`relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ${className}`}>
       <div className="relative pb-[75%]"> {/* 4:3 aspect ratio - adjust to 56.25% for 16:9 */}
@@ -24,12 +14,16 @@ export default function ImageCard({
           src={src}
           alt={alt}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-105"
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          quality={85}
-          priority={false} // set true for hero images only
         />
       </div>
+      {(title || description) && (
+        <div className="p-4 bg-white dark:bg-slate-800">
+          {title && <h3 className="text-lg font-semibold mb-2">{title}</h3>}
+          {description && <p className="text-gray-600 dark:text-slate-300 text-sm">{description}</p>}
+        </div>
+      )}
     </div>
   );
 }

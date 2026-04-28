@@ -1,11 +1,10 @@
 'use client'
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft, Globe, CheckCircle, Plane, Hotel, Umbrella, Coffee, MapPin, Phone, Mail, Clock, Users, Camera, Sun, Waves, Mountain, Building, Landmark, Heart } from 'lucide-react'
-import ServiceInquiry from '../../../components/ServiceInquiry'
-import TourismVideo from '../../../components/TourismVideo'
-import DestinationVideo from '../../../components/DestinationVideo'
+import Link from 'next/link';
+import { ArrowLeft, Heart, Plane, Hotel, Users, MapPin, CheckCircle, Clock, Globe } from 'lucide-react';
+import DestinationVideo from '../../../components/DestinationVideo';
+import TourismVideo from '../../../components/TourismVideo';
+import ServiceInquiry from '../../../components/ServiceInquiry';
 
 export default function TourismPage() {
   const destinations = [
@@ -14,43 +13,43 @@ export default function TourismPage() {
       region: "Sud-Est",
       image: "/images/tourism/grand-bassam.svg",
       description: "Ancienne capitale coloniale, patrimoine mondial de l'UNESCO",
-      attractions: ["Maison du Gouverneur", "Plage de Grand-Bassam", "MusÈe des Civilisations"],
+      attractions: ["Maison du Gouverneur", "Plage de Grand-Bassam", "Mus√©e des Civilisations"],
       videoId: "JTZxB76Grig",
-      videoTitle: "Vue aÈrienne de Grand-Bassam"
+      videoTitle: "Vue a√©rienne de Grand-Bassam"
     },
     {
       name: "Man & Les Montagnes",
       region: "Ouest",
       image: "/images/tourism/man-mountains.svg",
-      description: "Paysage montagneux exceptionnel, cascades et forÍts tropicales",
+      description: "Paysage montagneux exceptionnel, cascades et for√™ts tropicales",
       attractions: ["Mont Tonkoui", "Cascade de la Semien", "La Dent de Man"],
       videoId: "nJI467D6xq8",
-      videoTitle: "DÈcouvrez les 18 montagnes de Man"
+      videoTitle: "D√©couvrez les 18 montagnes de Man"
     },
     {
       name: "Yamoussoukro",
       region: "Centre",
       image: "/images/tourism/yamoussoukro.svg",
       description: "Capitale politique avec la plus grande basilique du monde",
-      attractions: ["Basilique Notre-Dame de la Paix", "Fondation FÈlix HouphouÎt-Boigny", "Lac aux CaÔmans"],
+      attractions: ["Basilique Notre-Dame de la Paix", "Fondation F√©lix Houphou√´t-Boigny", "Lac aux Ca√Ømans"],
       videoId: "jLZbZwJmSTo",
       videoTitle: "City Tour - Yamoussoukro"
     },
     {
-      name: "San Pedro & La CÙte",
+      name: "San Pedro & La C√¥te",
       region: "Sud-Ouest",
       image: "/images/tourism/san-pedro.svg",
-      description: "Plages paradisiaques et forÍt classÈe de TaÔ",
-      attractions: ["Plage de San Pedro", "Parc National de TaÔ", "Rocher de San Pedro"],
+      description: "Plages paradisiaques et for√™t class√©e de Ta√Ø",
+      attractions: ["Plage de San Pedro", "Parc National de Ta√Ø", "Rocher de San Pedro"],
       videoId: "PtbHHSnNVBM",
-      videoTitle: "San Pedro & La CÙte"
+      videoTitle: "San Pedro & La C√¥te"
     },
     {
       name: "Korhogo & Le Nord",
       region: "Nord",
       image: "/images/tourism/korhogo.svg",
-      description: "Capitale du SÈnoufo, artisanat et culture authentique",
-      attractions: ["MarchÈ d'artisanat", "Mont Korhogo", "Village de Niofoin"],
+      description: "Capitale du S√©noufo, artisanat et culture authentique",
+      attractions: ["March√© d'artisanat", "Mont Korhogo", "Village de Niofoin"],
       videoId: "WfH010lbNC4",
       videoTitle: "Korhogo & Le Nord"
     },
@@ -58,8 +57,8 @@ export default function TourismPage() {
       name: "Abidjan",
       region: "Sud",
       image: "/images/tourism/abidjan.svg",
-      description: "MÈtropole moderne, vie nocturne vibrante et lagunes",
-      attractions: ["Plateau", "Banco National Park", "Stade FÈlix HouphouÎt-Boigny"],
+      description: "M√©tropole moderne, vie nocturne vibrante et lagunes",
+      attractions: ["Plateau", "Banco National Park", "Stade F√©lix Houphou√´t-Boigny"],
       videoId: "FKixnj7Gij8",
       videoTitle: "Abidjan"
     }
@@ -68,21 +67,21 @@ export default function TourismPage() {
   const visaTypes = [
     {
       name: "Visa Touristique",
-      duration: "SÈjour de 3 mois",
-      price: "¿ partir de 250$",
-      features: ["Tourisme", "Visite familiale", "DÈcouverte culturelle"]
+      duration: "S√©jour de 3 mois",
+      price: "√Ä partir de 250$",
+      features: ["Tourisme", "Visite familiale", "D√©couverte culturelle"]
     },
     {
       name: "Visa d'Affaires",
-      duration: "SÈjour de 3 mois",
-      price: "¿ partir de 500$",
-      features: ["ConfÈrences", "RÈunions", "Prospection commerciale"]
+      duration: "S√©jour de 3 mois",
+      price: "√Ä partir de 500$",
+      features: ["Conf√©rences", "R√©unions", "Prospection commerciale"]
     },
     {
-      name: "Visa de Long SÈjour",
-      duration: "6 mois ‡ 1 an",
-      price: "¿ partir de 500$",
-      features: ["…tudiants", "BÈnÈvoles", "Volontaires"]
+      name: "Visa de Long S√©jour",
+      duration: "6 mois √† 1 an",
+      price: "√Ä partir de 500$",
+      features: ["√âtudiants", "B√©n√©voles", "Volontaires"]
     }
   ]
 
@@ -98,45 +97,46 @@ export default function TourismPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-amber-900/80 to-orange-900/80 z-10" />
           <div className="relative z-20 p-8 md:p-12 text-center">
             <div className="inline-flex items-center gap-2 bg-amber-500/90 px-3 py-1 rounded-full text-sm font-bold text-slate-900 mb-4">
-              <Heart className="w-4 h-4" /> DÈcouvrez la CÙte d'Ivoire
+              <Heart className="w-4 h-4" /> D√©couvrez la C√¥te d'Ivoire
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Tourisme & Visa en CÙte d'Ivoire
+              Tourisme & Visa en C√¥te d'Ivoire
             </h1>
-            <p className="text-slate-500 $ $ text-lg mb-6 max-w-2xl mx-auto">
-              Massaba Consulting vous accompagne dans vos dÈmarches de visa pour dÈcouvrir 
-              les merveilles touristiques de la CÙte d'Ivoire.
+            <p className="text-slate-200 text-lg mb-6 max-w-2xl mx-auto">
+              Massaba Consulting vous accompagne dans vos d√©marches de visa pour d√©couvrir
+              les merveilles touristiques de la C√¥te d'Ivoire.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <div className="flex items-center gap-2 text-slate-500 $ $">
-                <Plane className="w-5 h-5" /> Visa simplifiÈ
+              <div className="flex items-center gap-2 text-slate-200">
+                <Plane className="w-5 h-5" /> Visa simplifi√©
               </div>
-              <div className="flex items-center gap-2 text-slate-500 $ $">
-                <Hotel className="w-5 h-5" /> SÈjours sur mesure
+              <div className="flex items-center gap-2 text-slate-200">
+                <Hotel className="w-5 h-5" /> S√©jours sur mesure
               </div>
-              <div className="flex items-center gap-2 text-slate-500 $ $">
-                <Users className="w-5 h-5" /> Accompagnement personnalisÈ
+              <div className="flex items-center gap-2 text-slate-200">
+                <Users className="w-5 h-5" /> Accompagnement personnalis√©
               </div>
             </div>
           </div>
         </div>
 
-        {/* Promotional Video Section */}
+        {/* Promotional Video Section - UPDATED VIDEO ID */}
         <div className="mb-12">
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
-              <span className="text-amber-500 text-sm font-medium">?? VidÈo de Promotion</span>
+              <span className="text-amber-500 text-sm font-medium">üìπ Vid√©o de Promotion</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              DÈcouvrez la CÙte d'Ivoire en VidÈo
+              D√©couvrez la C√¥te d'Ivoire en Vid√©o
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Un aperÁu visuel des merveilles touristiques de la CÙte d'Ivoire
+              Un aper√ßu visuel des merveilles touristiques de la C√¥te d'Ivoire
             </p>
           </div>
-          <TourismVideo videoId="_VrWeJov7jM" />
+          {/* CHANGED: Updated videoId to _Fs78U1i3sU and added autoPlay */}
+          <TourismVideo videoId="_Fs78U1i3sU" autoPlay={true} />
           <p className="text-center text-slate-500 text-sm mt-4">
-            ?? La CÙte d'Ivoire vous attend - DÈcouvrez ses paysages, sa culture et son hospitalitÈ lÈgendaire
+            üåç La C√¥te d'Ivoire vous attend - D√©couvrez ses paysages, sa culture et son hospitalit√© l√©gendaire
           </p>
         </div>
 
@@ -144,14 +144,14 @@ export default function TourismPage() {
         <div className="mb-12">
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
-              <span className="text-amber-500 text-sm font-medium">?? Services de Visa</span>
+              <span className="text-amber-500 text-sm font-medium">üé´ Services de Visa</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Obtenez votre visa facilement avec Massaba
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Nous vous accompagnons dans toutes les Ètapes de votre demande de visa pour la CÙte d'Ivoire.
-              Processus simplifiÈ, dÈlais rÈduits, accompagnement personnalisÈ.
+              Nous vous accompagnons dans toutes les √©tapes de votre demande de visa pour la C√¥te d'Ivoire.
+              Processus simplifi√©, d√©lais r√©duits, accompagnement personnalis√©.
             </p>
           </div>
 
@@ -182,16 +182,16 @@ export default function TourismPage() {
               <div>
                 <h3 className="text-white font-semibold mb-2">Documents requis pour le visa</h3>
                 <ul className="text-slate-400 text-sm space-y-1">
-                  <li>? Passeport valide 6 mois</li>
-                  <li>? Formulaire de demande rempli</li>
-                  <li>? Photo d'identitÈ rÈcente</li>
-                  <li>? RÈservation d'hÈbergement</li>
-                  <li>? Billet d'avion aller-retour</li>
+                  <li>üìÑ Passeport valide 6 mois</li>
+                  <li>üìù Formulaire de demande rempli</li>
+                  <li>üì∏ Photo d'identit√© r√©cente</li>
+                  <li>üè® R√©servation d'h√©bergement</li>
+                  <li>‚úàÔ∏è Billet d'avion aller-retour</li>
                 </ul>
               </div>
               <div className="text-right">
-                <p className="text-amber-400 text-sm">DÈlai de traitement</p>
-                <p className="text-white font-bold text-xl">3 ‡ 5 jours ouvrÈs</p>
+                <p className="text-amber-400 text-sm">D√©lai de traitement</p>
+                <p className="text-white font-bold text-xl">3 √† 5 jours ouvr√©s</p>
               </div>
             </div>
           </div>
@@ -201,13 +201,13 @@ export default function TourismPage() {
         <div className="mb-12">
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-amber-500/10 px-4 py-2 rounded-full mb-4">
-              <span className="text-amber-500 text-sm font-medium">??? Destinations</span>
+              <span className="text-amber-500 text-sm font-medium">üèùÔ∏è Destinations</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Explorez la CÙte d'Ivoire
+              Explorez la C√¥te d'Ivoire
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Des plages paradisiaques aux montagnes majestueuses, dÈcouvrez la diversitÈ de la CÙte d'Ivoire.
+              Des plages paradisiaques aux montagnes majestueuses, d√©couvrez la diversit√© de la C√¥te d'Ivoire.
             </p>
           </div>
 
@@ -220,16 +220,16 @@ export default function TourismPage() {
                     <MapPin className="w-4 h-4 text-amber-500" />
                     <span className="text-white text-sm font-medium">{dest.region}</span>
                   </div>
-                  <img 
+                  <img
                     src={dest.image}
                     alt={dest.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => { e.target.src = '/images/placeholders/tourism-placeholder.svg' }}
+                    onError={(e) => { (e.target as HTMLImageElement).src = '/images/placeholders/tourism-placeholder.svg' }}
                   />
-                  <DestinationVideo 
-                    videoId={dest.videoId} 
-                    title={dest.videoTitle} 
-                    destinationName={dest.name} 
+                  <DestinationVideo
+                    videoId={dest.videoId}
+                    title={dest.videoTitle}
+                    destinationName={dest.name}
                   />
                 </div>
                 <div className="p-4">
@@ -267,14 +267,14 @@ export default function TourismPage() {
                 <Users className="w-6 h-6 text-amber-500" />
               </div>
               <p className="text-white font-semibold">Accompagnement</p>
-              <p className="text-slate-400 text-sm">Suivi personnalisÈ</p>
+              <p className="text-slate-400 text-sm">Suivi personnalis√©</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
                 <CheckCircle className="w-6 h-6 text-amber-500" />
               </div>
               <p className="text-white font-semibold">Garantie</p>
-              <p className="text-slate-400 text-sm">Taux de succËs ÈlevÈ</p>
+              <p className="text-slate-400 text-sm">Taux de succ√®s √©lev√©</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
@@ -287,7 +287,7 @@ export default function TourismPage() {
         </div>
 
         {/* Contact Form */}
-        <ServiceInquiry serviceName="Tourisme & Visa - CÙte d'Ivoire" />
+        <ServiceInquiry serviceName="Tourisme & Visa - C√¥te d'Ivoire" />
       </div>
     </div>
   )

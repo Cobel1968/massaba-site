@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from 'next/link'
 import { ArrowLeft, Briefcase, Globe, Award, Users } from 'lucide-react'
@@ -22,8 +22,8 @@ export default function AboutPage() {
                 alt="Mr. Coulibaly Brahima - Founder of Massaba Consulting"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div className="w-full h-full flex items-center justify-center"><span className="text-5xl font-bold text-amber-500">CB</span></div>';
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).parentElement!.innerHTML = '<div className="w-full h-full flex items-center justify-center"><span className="text-5xl font-bold text-amber-500">CB</span></div>';
                 }}
               />
             </div>
@@ -77,8 +77,8 @@ export default function AboutPage() {
                   alt="RITA Services"
                   className="w-20 h-20 object-contain"
                   onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<span className="text-2xl font-bold text-amber-500">RITA</span>';
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    (e.target as HTMLImageElement).parentElement!.innerHTML = '<span className="text-2xl font-bold text-amber-500">RITA</span>';
                   }}
                 />
               </div>
@@ -94,8 +94,8 @@ export default function AboutPage() {
                   alt="CBTC"
                   className="w-20 h-20 object-contain"
                   onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = '<span className="text-2xl font-bold text-amber-500">CBTC</span>';
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    (e.target as HTMLImageElement).parentElement!.innerHTML = '<span className="text-2xl font-bold text-amber-500">CBTC</span>';
                   }}
                 />
               </div>
@@ -113,8 +113,8 @@ export default function AboutPage() {
                 alt="Massaba Consulting" 
                 className="w-16 h-16 object-contain"
                 onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<span className="text-4xl font-bold text-slate-900">M</span>';
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).parentElement!.innerHTML = '<span className="text-4xl font-bold text-slate-900">M</span>';
                 }}
               />
             </div>
@@ -155,11 +155,11 @@ export default function AboutPage() {
             <div>
               <h2 className="text-2xl font-bold text-white mb-3">Contact Information</h2>
               <div className="space-y-2 text-slate-300">
-                <p>📧 {COMPANY_INFO.email}</p>
-                <p>📞 {COMPANY_INFO.phone}</p>
-                <p>💬 WhatsApp: {COMPANY_INFO.whatsapp}</p>
-                <p>📍 {COMPANY_INFO.address}</p>
-                <p>⏰ {COMPANY_INFO.businessHours}</p>
+                <p>?? {COMPANY_INFO.email}</p>
+                <p>?? {COMPANY_INFO.phone}</p>
+                <p>?? WhatsApp: {COMPANY_INFO.whatsapp}</p>
+                <p>?? {COMPANY_INFO.address}</p>
+                <p>? {COMPANY_INFO.businessHours}</p>
               </div>
             </div>
             
@@ -168,12 +168,12 @@ export default function AboutPage() {
               <div className="flex gap-4">
                 {SOCIAL_LINKS.instagram && (
                   <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                    📷 Instagram
+                    ?? Instagram
                   </a>
                 )}
                 {SOCIAL_LINKS.facebook && (
                   <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-amber-500 transition">
-                    📘 Facebook
+                    ?? Facebook
                   </a>
                 )}
               </div>

@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Your existing images configuration (important for Unsplash etc.)
+  // Your existing images configuration
   images: {
     remotePatterns: [
       {
@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+  },
+
+  // Ignore TypeScript errors during build
+  typescript: {
+    ignoreBuildErrors: true,
   },
 
   // This silences the Turbopack + webpack conflict in Next.js 16

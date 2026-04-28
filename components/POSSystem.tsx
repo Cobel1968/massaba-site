@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { 
@@ -95,7 +95,7 @@ export default function POSSystem() {
 
     let vehicleValue = 0
     if (selectedPackage.service_type === 'Vehicle Import/Export') {
-      vehicleValue = parseFloat(customValues.vehicle_value) || 0
+      vehicleValue = (typeof customValues.vehicle_value === "string" ? (typeof customValues.vehicle_value === "string" ? parseFloat(customValues.vehicle_value) : customValues.vehicle_value) : customValues.vehicle_value) || 0
       if (vehicleValue <= 0) {
         setMessage(' Please enter vehicle value for customs calculation')
         return
