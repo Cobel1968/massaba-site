@@ -4,14 +4,13 @@ import Navbar from '@/components/navbar'
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/lib/constants'
 import Link from 'next/link'
 import ClientLayout from '@/components/ClientLayout'
-
+import AIChat from '@/components/AIChat'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
 }
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://massaba.app'),
   title: {
@@ -77,18 +76,18 @@ export const metadata: Metadata = {
   category: 'business',
   classification: 'Consultancy Services',
 }
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-950">
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-slate-950" suppressHydrationWarning>
         <ClientLayout>
           {children}
         </ClientLayout>
+        <AIChat />
       </body>
     </html>
   )
